@@ -124,3 +124,9 @@ Migrating to ChangeAddColumn (2)
  WHERE type = 'table' AND NOT name = 'sqlite_sequence'
 [0m
   [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("items")[0m
+
+
+Processing ItemsController#new (for 127.0.0.1 at 2010-10-02 23:58:07) [GET]
+Rendering template within layouts/base
+Rendering items/new
+Completed in 77ms (View: 74, DB: 0) | 200 OK [http://localhost/items/new]
