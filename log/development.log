@@ -76,3 +76,51 @@ Processing TotalController#amount (for 127.0.0.1 at 2010-10-02 23:34:26) [GET]
 Rendering template within layouts/base
 Rendering total/amount
 Completed in 17ms (View: 13, DB: 0) | 200 OK [http://localhost/?date=2010-09-19&sum_type=day]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2010-10-02 23:50:38) [GET]
+  Parameters: {"sum_type"=>"day", "date"=>"2010-09-19"}
+  [4;36;1mItem Load (0.3ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at = '2010-09-19') ORDER BY happen_at ASC, id ASC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at = '2010-09-19') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at = '2010-09-19') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 46ms (View: 41, DB: 0) | 200 OK [http://localhost/?date=2010-09-19&sum_type=day]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2010-10-02 23:50:43) [GET]
+  [4;35;1mItem Load (0.7ms)[0m   [0mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 100[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 23ms (View: 19, DB: 1) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (2.3ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (1.9ms)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT version FROM "schema_info"[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT version FROM "schema_migrations"[0m
+  [4;35;1mSQL (1.9ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('2')[0m
+  [4;36;1mSQL (1.8ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('1')[0m
+  [4;35;1mSQL (1.4ms)[0m   [0mDROP TABLE "schema_info"[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateItems (1)
+Migrating to ChangeAddColumn (2)
+  [4;35;1mSQL (0.1ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.1ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("items")[0m
