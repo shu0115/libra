@@ -1,0 +1,37 @@
+<h3>品目編集</h3>
+
+<%= error_messages_for :item %>
+
+<% form_for @item, :url => { :action => "update", :id => @item.id } do |f| %>
+  <p>
+    <b>品目名</b><br />
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <b>収支タイプ</b><br />
+		<%= f.select :item_type, [ ["収入", "income"], ["支出", "expense"] ] %>
+  </p>
+
+  <p>
+    <b>周期</b><br />
+    <%= f.text_field :cycle, :size => "10" %> <%= f.select :cycle_mode, [ ["day","day"], ["month","month"], ["year","year"] ] %>
+  </p>
+
+  <p>
+    <b>金額</b><br />
+    <%= f.text_field :price, :size => "20" %>
+  </p>
+
+  <p>
+    <b>発生日</b><br />
+    <%= f.date_select :happen_at, :use_month_numbers => true %>
+  </p>
+
+  <p>
+    <%= f.submit "保存" %>
+  </p>
+<% end %>
+
+<%= link_to '閲覧', :action => "show", :id => @item.id %>
+ | <%= link_to '一覧', :controller => "total", :action => "amount", :sum_type => "all" %>

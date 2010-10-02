@@ -1,0 +1,80 @@
+<h1>Total#<%= @sum_type %></h1>
+
+<% if @sum_type == "year" %>
+	<p><%= @now_date.strftime( "%Y年" ) %></p>
+<% elsif @sum_type == "month" %>
+	<p><%= @now_date.strftime( "%Y年%m月" ) %></p>
+<% elsif @sum_type == "day" %>
+	<p><%= @now_date.strftime( "%Y年%m月%d日" ) %></p>
+<% end %>
+
+<table>
+
+	<tr>
+		<th>No.</th>
+		<th>品目</th>
+		<th>タイプ</th>
+		<th>金額</th>
+		<th>発生日</th>
+	</tr>
+
+<% unless @items.blank? %>
+	<%# each_with_index %>
+	<% @items.each_with_index{ |item, index| %>
+		<%# タイプ別色分け %>
+		<% type_color = "black" %>
+		<% type_color = "blue" if $type_hash[item.item_type] == "収入" %>
+		<% type_color = "red" if $type_hash[item.item_type] == "支出" %>
+
+		<tr>
+			<!-- No. -->
+			<td><%= index + 1 %></td>
+
+			<!-- 品目 -->
+			<td><%=h item.name %></td>
+
+			<!-- タイプ -->
+			<td><span style="color: <%= type_color %>;"><%=h $type_hash[item.item_type] %></span></td>
+
+			<!-- 金額 -->
+			<td class="text_right"><%= "-" if $type_hash[item.item_type] == "支出" %><%= number_with_delimiter( item.price ) %>円</td>
+
+			<!-- 発生日 -->
+			<td><%=h item.happen_at.strftime( "%Y/%m/%d" ) %></td>
+
+			<!-- リンク -->
+			<td><%= link_to '閲覧', :controller => "items", :action => "show", :id => item.id %></td>
+			<td><%= link_to '編集', :controller => "items", :action => "edit", :id => item.id %></td>
+			<td><%= link_to '削除', { :controller => "items", :action => "destroy", :id => item.id }, :confirm => '本当に削除してよろしいですか?' %></td>
+		</tr>
+	<% } # each_with_index - END %>
+<% end %>
+
+</table>
+
+<br />
+
+<table>
+
+	<tr>
+		<th>収入：</th>
+		<td class="text_right"><%= number_with_delimiter( @income ) %>円</td>
+	</tr>
+
+	<tr>
+		<th>支出：</th>
+		<td class="text_right">-<%= number_with_delimiter( @expense ) %>円</td>
+	</tr>
+
+	<tr>
+		<th>合計：</th>
+		<td class="text_right"><%= number_with_delimiter( @amount ) %>円</td>
+	</tr>
+
+</table>
+
+<br />
+
+<%= link_to '新規作成', :controller => "items", :action => "new" %><br />
+
+<br />

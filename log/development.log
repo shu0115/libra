@@ -1,0 +1,78 @@
+
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-02 23:15:17) [GET]
+
+ActionController::RoutingError (No route matches "/" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+
+
+Processing ActionController::Base#amount (for 127.0.0.1 at 2010-10-02 23:25:28) [GET]
+
+NameError (uninitialized constant ApplicationController):
+  app/controllers/total_controller.rb:1
+
+Rendered rescues/_trace (25.4ms)
+Rendered rescues/_request_and_response (0.8ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing ActionController::Base#amount (for 127.0.0.1 at 2010-10-02 23:30:37) [GET]
+
+NameError (uninitialized constant ApplicationController):
+  app/controllers/total_controller.rb:1
+
+Rendered rescues/_trace (25.5ms)
+Rendered rescues/_request_and_response (0.8ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing ActionController::Base#amount (for 127.0.0.1 at 2010-10-02 23:32:01) [GET]
+
+NameError (uninitialized constant ApplicationController):
+  app/controllers/total_controller.rb:1
+
+Rendered rescues/_trace (55.9ms)
+Rendered rescues/_request_and_response (0.2ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2010-10-02 23:33:59) [GET]
+  [4;36;1mItem Load (0.8ms)[0m   [0;1mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 100[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 42ms (View: 37, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2010-10-02 23:34:16) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;35;1mItem Load (0.7ms)[0m   [0mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 100[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 53ms (View: 49, DB: 1) | 200 OK [http://localhost/?sum_type=all]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2010-10-02 23:34:25) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2010-9-2"}
+  [4;36;1mItem Load (0.5ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at >= '2010-09-01' AND happen_at <= '2010-09-30') ORDER BY happen_at ASC, id ASC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2010-09-01' AND happen_at <= '2010-09-30') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2010-09-01' AND happen_at <= '2010-09-30') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 22ms (View: 17, DB: 1) | 200 OK [http://localhost/?date=2010-9-2&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2010-10-02 23:34:26) [GET]
+  Parameters: {"sum_type"=>"day", "date"=>"2010-09-19"}
+  [4;35;1mItem Load (0.2ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at = '2010-09-19') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at = '2010-09-19') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at = '2010-09-19') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 17ms (View: 13, DB: 0) | 200 OK [http://localhost/?date=2010-09-19&sum_type=day]
