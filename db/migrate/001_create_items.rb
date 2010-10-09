@@ -3,7 +3,7 @@ class CreateItems < ActiveRecord::Migration
     create_table :items do |t|
       t.string :name
       t.string :item_type
-      t.string :cycle
+      t.integer :cycle
       t.integer :price
       t.date :happen_at
 

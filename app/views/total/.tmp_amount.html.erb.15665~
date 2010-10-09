@@ -40,7 +40,7 @@
 			<td class="text_right"><%= "-" if $type_hash[item.item_type] == "支出" %><%= number_with_delimiter( item.price ) %>円</td>
 
 			<!-- 発生日 -->
-			<td><%=h item.happen_at.strftime( "%Y/%m/%d" ) unless item.happen_at.blank? %></td>
+			<td><%=h item.happen_at.strftime( "%Y/%m/%d" ) %></td>
 
 			<!-- リンク -->
 			<td><%= link_to '閲覧', :controller => "items", :action => "show", :id => item.id %></td>
