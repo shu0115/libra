@@ -320,3 +320,89 @@ Processing TotalController#amount (for 127.0.0.1 at 2010-10-11 23:32:13) [GET]
 Rendering template within layouts/base
 Rendering total/amount
 Completed in 26ms (View: 21, DB: 1) | 200 OK [http://localhost/?sum_type=all]
+
+
+Processing ItemsController#edit (for 127.0.0.1 at 2010-10-11 23:42:34) [GET]
+  Parameters: {"id"=>"15"}
+  [4;35;1mItem Load (0.2ms)[0m   [0mSELECT * FROM "items" WHERE ("items"."id" = 15) [0m
+Rendering template within layouts/base
+Rendering items/edit
+Completed in 24ms (View: 21, DB: 0) | 200 OK [http://localhost/items/edit/15]
+
+
+Processing ItemsController#edit (for 127.0.0.1 at 2010-10-11 23:46:16) [GET]
+  Parameters: {"id"=>"15"}
+  [4;36;1mItem Load (0.2ms)[0m   [0;1mSELECT * FROM "items" WHERE ("items"."id" = 15) [0m
+Rendering template within layouts/base
+Rendering items/edit
+Completed in 25ms (View: 20, DB: 0) | 200 OK [http://localhost/items/edit/15]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2010-10-11 23:46:19) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;35;1mItem Load (0.8ms)[0m   [0mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 100[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 25ms (View: 21, DB: 1) | 200 OK [http://localhost/?sum_type=all]
+
+
+Processing ItemsController#edit (for 127.0.0.1 at 2010-10-11 23:46:21) [GET]
+  Parameters: {"id"=>"11"}
+  [4;36;1mItem Load (0.2ms)[0m   [0;1mSELECT * FROM "items" WHERE ("items"."id" = 11) [0m
+Rendering template within layouts/base
+Rendering items/edit
+Completed in 22ms (View: 17, DB: 0) | 200 OK [http://localhost/items/edit/11]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2010-10-11 23:46:22) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;35;1mItem Load (0.8ms)[0m   [0mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 100[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 25ms (View: 20, DB: 1) | 200 OK [http://localhost/?sum_type=all]
+
+
+Processing ItemsController#show (for 127.0.0.1 at 2010-10-11 23:46:27) [GET]
+  Parameters: {"id"=>"15"}
+  [4;36;1mItem Load (0.2ms)[0m   [0;1mSELECT * FROM "items" WHERE ("items"."id" = 15) [0m
+Rendering template within layouts/base
+Rendering items/show
+Completed in 19ms (View: 16, DB: 0) | 200 OK [http://localhost/items/show/15]
+
+
+Processing ItemsController#show (for 127.0.0.1 at 2010-10-11 23:47:16) [GET]
+  Parameters: {"id"=>"15"}
+  [4;35;1mItem Load (0.2ms)[0m   [0mSELECT * FROM "items" WHERE ("items"."id" = 15) [0m
+Rendering template within layouts/base
+Rendering items/show
+Completed in 18ms (View: 13, DB: 0) | 200 OK [http://localhost/items/show/15]
+
+
+Processing ItemsController#show (for 127.0.0.1 at 2010-10-11 23:47:27) [GET]
+  Parameters: {"id"=>"15"}
+  [4;36;1mItem Load (0.2ms)[0m   [0;1mSELECT * FROM "items" WHERE ("items"."id" = 15) [0m
+Rendering template within layouts/base
+Rendering items/show
+Completed in 59ms (View: 55, DB: 0) | 200 OK [http://localhost/items/show/15]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2010-10-11 23:47:30) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;35;1mItem Load (0.8ms)[0m   [0mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 100[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 25ms (View: 20, DB: 1) | 200 OK [http://localhost/?sum_type=all]
+
+
+Processing ItemsController#show (for 127.0.0.1 at 2010-10-11 23:47:31) [GET]
+  Parameters: {"id"=>"11"}
+  [4;36;1mItem Load (0.2ms)[0m   [0;1mSELECT * FROM "items" WHERE ("items"."id" = 11) [0m
+Rendering template within layouts/base
+Rendering items/show
+Completed in 17ms (View: 13, DB: 0) | 200 OK [http://localhost/items/show/11]

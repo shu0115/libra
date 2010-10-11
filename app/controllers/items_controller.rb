@@ -9,6 +9,11 @@ class ItemsController < ApplicationController
   #------#
   def show
     @item = Item.find( params[:id] )
+    if @item.item_type == "income"
+      @item_type = "収入"
+    else
+      @item_type = "支出"
+    end
   end
 
   #-----#
@@ -23,6 +28,11 @@ class ItemsController < ApplicationController
   #------#
   def edit
     @item = Item.find( params[:id] )
+    if @item.item_type == "income"
+      @item_type_income = true
+    else
+      @item_type_expense = true
+    end
   end
 
   #--------#
