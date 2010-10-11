@@ -10,17 +10,13 @@
 
   <p>
     <b>品目タイプ</b><br />
-		<%#= f.select :item_type, [ ["収入", "income"], ["支出", "expense"] ] %>
-	  <%= f.radio_button :item_type, "income", :checked => false %><label for="item_type_income">収入</label>
-	  <%= f.radio_button :item_type, "expense", :checked => true %><label for="item_type_expense">支出</label>
+		<%= f.select :item_type, [ ["収入", "income"], ["支出", "expense"] ] %>
   </p>
 
-<% if false %>
   <p>
     <b>周期</b><br />
     <%= f.text_field :cycle, :size => "10" %> <%= f.select :cycle_mode, [ ["day","day"], ["month","month"], ["year","year"] ] %>
   </p>
-<% end %>
 
   <p>
     <b>金額</b><br />

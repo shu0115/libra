@@ -130,3 +130,193 @@ Processing ItemsController#new (for 127.0.0.1 at 2010-10-02 23:58:07) [GET]
 Rendering template within layouts/base
 Rendering items/new
 Completed in 77ms (View: 74, DB: 0) | 200 OK [http://localhost/items/new]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2010-10-11 23:19:44) [GET]
+  [4;36;1mItem Load (0.7ms)[0m   [0;1mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 100[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 42ms (View: 37, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing ItemsController#new (for 127.0.0.1 at 2010-10-11 23:19:47) [GET]
+Rendering template within layouts/base
+Rendering items/new
+Completed in 89ms (View: 58, DB: 0) | 200 OK [http://localhost/items/new]
+
+
+Processing ItemsController#new (for 127.0.0.1 at 2010-10-11 23:21:09) [GET]
+Rendering template within layouts/base
+Rendering items/new
+Completed in 59ms (View: 55, DB: 0) | 200 OK [http://localhost/items/new]
+
+
+Processing ItemsController#new (for 127.0.0.1 at 2010-10-11 23:21:23) [GET]
+Rendering template within layouts/base
+Rendering items/new
+Completed in 25ms (View: 21, DB: 0) | 200 OK [http://localhost/items/new]
+
+
+Processing ItemsController#new (for 127.0.0.1 at 2010-10-11 23:23:15) [GET]
+Rendering template within layouts/base
+Rendering items/new
+Completed in 21ms (View: 17, DB: 0) | 200 OK [http://localhost/items/new]
+
+
+Processing ItemsController#create (for 127.0.0.1 at 2010-10-11 23:23:26) [POST]
+  Parameters: {"commit"=>"作成", "authenticity_token"=>"QID2IYdSs4RzFsvNXLOVqtEGu46HA8jE/BEa5+tkZeo=", "item"=>{"price"=>"100", "name"=>"テスト", "happen_at(1i)"=>"2010", "happen_at(2i)"=>"10", "happen_at(3i)"=>"11"}, "item_type"=>"expense"}
+  [4;35;1mItem Create (0.3ms)[0m   [0mINSERT INTO "items" ("name", "price", "created_at", "updated_at", "cycle", "cycle_mode", "happen_at", "item_type") VALUES('テスト', 100, '2010-10-11 14:23:26', '2010-10-11 14:23:26', NULL, NULL, '2010-10-11', NULL)[0m
+Redirected to http://localhost:3000/?sum_type=all
+Completed in 8ms (DB: 0) | 302 Found [http://localhost/items/create]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2010-10-11 23:23:26) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;36;1mItem Load (0.8ms)[0m   [0;1mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 100[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 25ms (View: 20, DB: 1) | 200 OK [http://localhost/?sum_type=all]
+
+
+Processing ItemsController#new (for 127.0.0.1 at 2010-10-11 23:24:55) [GET]
+Rendering template within layouts/base
+Rendering items/new
+Completed in 61ms (View: 58, DB: 0) | 200 OK [http://localhost/items/new]
+
+
+Processing ItemsController#new (for 127.0.0.1 at 2010-10-11 23:26:41) [GET]
+Rendering template within layouts/base
+Rendering items/new
+Completed in 25ms (View: 21, DB: 0) | 200 OK [http://localhost/items/new]
+
+
+Processing ItemsController#new (for 127.0.0.1 at 2010-10-11 23:27:57) [GET]
+Rendering template within layouts/base
+Rendering items/new
+Completed in 25ms (View: 21, DB: 0) | 200 OK [http://localhost/items/new]
+
+
+Processing ItemsController#new (for 127.0.0.1 at 2010-10-11 23:28:09) [GET]
+Rendering template within layouts/base
+Rendering items/new
+Completed in 25ms (View: 22, DB: 0) | 200 OK [http://localhost/items/new]
+
+
+Processing ItemsController#new (for 127.0.0.1 at 2010-10-11 23:28:43) [GET]
+Rendering template within layouts/base
+Rendering items/new
+Completed in 24ms (View: 21, DB: 0) | 200 OK [http://localhost/items/new]
+
+
+Processing ItemsController#new (for 127.0.0.1 at 2010-10-11 23:30:01) [GET]
+Rendering template within layouts/base
+Rendering items/new
+Completed in 24ms (View: 21, DB: 0) | 200 OK [http://localhost/items/new]
+
+
+Processing ItemsController#new (for 127.0.0.1 at 2010-10-11 23:30:53) [GET]
+Rendering template within layouts/base
+Rendering items/new
+
+ActionView::TemplateError (wrong number of arguments (4 for 3)) on line #14 of app/views/items/new.html.erb:
+11:   <p>
+12:     <b>品目タイプ</b><br />
+13: 		<%#= f.select :item_type, [ ["収入", "income"], ["支出", "expense"] ] %>
+14: 	  <%= f.radio_button :item_type, "income", checked = false, options = {} %><label for="item_type_income">収入</label>
+15: 	  <%= f.radio_button :item_type, "expense", checked = true, options = {} %><label for="item_type_expense">支出</label>
+16: <% if false %>
+17: 		<%= f.radio_button :item_type ,'income' %><%= f.label :item_type_income %>収入
+
+    app/views/items/new.html.erb:14:in `radio_button'
+    app/views/items/new.html.erb:14
+    app/views/items/new.html.erb:5
+
+Rendered rescues/_trace (70.8ms)
+Rendered rescues/_request_and_response (0.8ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing ItemsController#new (for 127.0.0.1 at 2010-10-11 23:31:22) [GET]
+Rendering template within layouts/base
+Rendering items/new
+Completed in 24ms (View: 20, DB: 0) | 200 OK [http://localhost/items/new]
+
+
+Processing ItemsController#create (for 127.0.0.1 at 2010-10-11 23:31:57) [POST]
+  Parameters: {"commit"=>"作成", "authenticity_token"=>"QID2IYdSs4RzFsvNXLOVqtEGu46HA8jE/BEa5+tkZeo=", "item"=>{"price"=>"100", "name"=>"テスト", "happen_at(1i)"=>"2010", "happen_at(2i)"=>"10", "happen_at(3i)"=>"11", "item_type"=>"expense"}}
+  [4;35;1mItem Create (0.2ms)[0m   [0mINSERT INTO "items" ("name", "price", "created_at", "updated_at", "cycle", "cycle_mode", "happen_at", "item_type") VALUES('テスト', 100, '2010-10-11 14:31:57', '2010-10-11 14:31:57', NULL, NULL, '2010-10-11', 'expense')[0m
+Redirected to http://localhost:3000/?sum_type=all
+Completed in 7ms (DB: 0) | 302 Found [http://localhost/items/create]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2010-10-11 23:31:57) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;36;1mItem Load (0.8ms)[0m   [0;1mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 100[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 30ms (View: 25, DB: 1) | 200 OK [http://localhost/?sum_type=all]
+
+
+Processing ItemsController#destroy (for 127.0.0.1 at 2010-10-11 23:32:04) [GET]
+  Parameters: {"id"=>"13"}
+  [4;35;1mItem Load (0.2ms)[0m   [0mSELECT * FROM "items" WHERE ("items"."id" = 13) [0m
+  [4;36;1mItem Destroy (0.2ms)[0m   [0;1mDELETE FROM "items" WHERE "id" = 13[0m
+Redirected to http://localhost:3000/?sum_type=all
+Completed in 6ms (DB: 0) | 302 Found [http://localhost/items/destroy/13]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2010-10-11 23:32:04) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;35;1mItem Load (0.7ms)[0m   [0mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 100[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 25ms (View: 21, DB: 1) | 200 OK [http://localhost/?sum_type=all]
+
+
+Processing ItemsController#destroy (for 127.0.0.1 at 2010-10-11 23:32:05) [GET]
+  Parameters: {"id"=>"14"}
+  [4;36;1mItem Load (0.2ms)[0m   [0;1mSELECT * FROM "items" WHERE ("items"."id" = 14) [0m
+  [4;35;1mItem Destroy (0.2ms)[0m   [0mDELETE FROM "items" WHERE "id" = 14[0m
+Redirected to http://localhost:3000/?sum_type=all
+Completed in 6ms (DB: 0) | 302 Found [http://localhost/items/destroy/14]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2010-10-11 23:32:06) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;36;1mItem Load (0.8ms)[0m   [0;1mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 100[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 26ms (View: 21, DB: 1) | 200 OK [http://localhost/?sum_type=all]
+
+
+Processing ItemsController#new (for 127.0.0.1 at 2010-10-11 23:32:07) [GET]
+Rendering template within layouts/base
+Rendering items/new
+Completed in 21ms (View: 18, DB: 0) | 200 OK [http://localhost/items/new]
+
+
+Processing ItemsController#create (for 127.0.0.1 at 2010-10-11 23:32:13) [POST]
+  Parameters: {"commit"=>"作成", "authenticity_token"=>"QID2IYdSs4RzFsvNXLOVqtEGu46HA8jE/BEa5+tkZeo=", "item"=>{"price"=>"100", "name"=>"テスト", "happen_at(1i)"=>"2010", "happen_at(2i)"=>"10", "happen_at(3i)"=>"11", "item_type"=>"expense"}}
+  [4;35;1mItem Create (0.3ms)[0m   [0mINSERT INTO "items" ("name", "price", "created_at", "updated_at", "cycle", "cycle_mode", "happen_at", "item_type") VALUES('テスト', 100, '2010-10-11 14:32:13', '2010-10-11 14:32:13', NULL, NULL, '2010-10-11', 'expense')[0m
+Redirected to http://localhost:3000/?sum_type=all
+Completed in 7ms (DB: 0) | 302 Found [http://localhost/items/create]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2010-10-11 23:32:13) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;36;1mItem Load (0.8ms)[0m   [0;1mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 100[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 26ms (View: 21, DB: 1) | 200 OK [http://localhost/?sum_type=all]
