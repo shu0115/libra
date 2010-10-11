@@ -8,7 +8,6 @@
   <%=h @item.item_type %>
 </p>
 
-<% if false %>
 <p>
   <b>周期:</b>
   <%=h @item.cycle %>
@@ -18,7 +17,6 @@
   <b>周期モード:</b>
   <%=h @item.cycle_mode %>
 </p>
-<% end %>
 
 <p>
   <b>金額:</b>

@@ -13,12 +13,10 @@
 		<%= f.select :item_type, [ ["収入", "income"], ["支出", "expense"] ] %>
   </p>
 
-<% if false %>
   <p>
     <b>周期</b><br />
     <%= f.text_field :cycle, :size => "10" %> <%= f.select :cycle_mode, [ ["day","day"], ["month","month"], ["year","year"] ] %>
   </p>
-<% end %>
 
   <p>
     <b>金額</b><br />
