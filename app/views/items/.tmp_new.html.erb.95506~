@@ -11,8 +11,8 @@
   <p>
     <b>品目タイプ</b><br />
 		<%#= f.select :item_type, [ ["収入", "income"], ["支出", "expense"] ] %>
-	  <%= f.radio_button :item_type, "income", :checked => false %><label for="item_item_type_income">収入</label>
-	  <%= f.radio_button :item_type, "expense", :checked => true %><label for="item_item_type_expense">支出</label>
+	  <%= f.radio_button :item_type, "income", :checked => false %><label for="item_type_income">収入</label>
+	  <%= f.radio_button :item_type, "expense", :checked => true %><label for="item_type_expense">支出</label>
   </p>
 
 <% if false %>

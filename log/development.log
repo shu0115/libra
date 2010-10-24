@@ -406,3 +406,19 @@ Processing ItemsController#show (for 127.0.0.1 at 2010-10-11 23:47:31) [GET]
 Rendering template within layouts/base
 Rendering items/show
 Completed in 17ms (View: 13, DB: 0) | 200 OK [http://localhost/items/show/11]
+
+
+Processing ItemsController#show (for 127.0.0.1 at 2010-10-20 21:50:23) [GET]
+  Parameters: {"id"=>"11"}
+  [4;35;1mItem Load (0.2ms)[0m   [0mSELECT * FROM "items" WHERE ("items"."id" = 11) [0m
+Rendering template within layouts/base
+Rendering items/show
+Completed in 25ms (View: 19, DB: 0) | 200 OK [http://localhost/items/show/11]
+
+
+Processing ItemsController#show (for 127.0.0.1 at 2010-10-20 21:52:43) [GET]
+  Parameters: {"id"=>"11"}
+  [4;36;1mItem Load (0.2ms)[0m   [0;1mSELECT * FROM "items" WHERE ("items"."id" = 11) [0m
+Rendering template within layouts/base
+Rendering items/show
+Completed in 17ms (View: 13, DB: 0) | 200 OK [http://localhost/items/show/11]
