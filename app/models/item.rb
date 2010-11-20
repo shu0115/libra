@@ -7,7 +7,7 @@ class Item < ActiveRecord::Base
 
     if args[:sum_type] == "all"
       # 直近100件取得
-      items = Item.find( :all, :limit => "100", :order => "happen_at DESC, id DESC" )
+      items = Item.find( :all, :limit => "10", :order => "happen_at DESC, id DESC" )
       income = Item.sum( :price, :conditions => [ "item_type = 'income'" ], :limit => "100" )
       expense = Item.sum( :price, :conditions => [ "item_type = 'expense'" ], :limit => "100" )
     elsif args[:sum_type] == "year"
