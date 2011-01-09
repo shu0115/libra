@@ -422,3 +422,940 @@ Processing ItemsController#show (for 127.0.0.1 at 2010-10-20 21:52:43) [GET]
 Rendering template within layouts/base
 Rendering items/show
 Completed in 17ms (View: 13, DB: 0) | 200 OK [http://localhost/items/show/11]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 05:43:31) [GET]
+  [4;36;1mItem Load (0.9ms)[0m   [0;1mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 10[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 66ms (View: 60, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 05:43:38) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-5-10"}
+  [4;35;1mItem Load (0.3ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2011-05-01' AND happen_at <= '2011-05-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-05-01' AND happen_at <= '2011-05-31') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-05-01' AND happen_at <= '2011-05-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 19ms (View: 14, DB: 1) | 200 OK [http://localhost/?date=2011-5-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 05:43:45) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-1-10"}
+  [4;36;1mItem Load (0.3ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 19ms (View: 13, DB: 0) | 200 OK [http://localhost/?date=2011-1-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 05:44:38) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;35;1mItem Load (0.9ms)[0m   [0mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 10[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 27ms (View: 22, DB: 1) | 200 OK [http://localhost/?sum_type=all]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 05:46:00) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;36;1mItem Load (1.4ms)[0m   [0;1mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 10[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+
+ActionView::TemplateError (undefined local variable or method `month' for #<ActionView::Base:0x10236a120>) on line #17 of app/views/layouts/base.html.erb:
+14: 
+15: <br />
+16: 
+17: <span class="now_date"><%= link_to( "#{month}月", :controller => "total", :action=>'amount', :date => "#{@now_date.year}-#{month}-#{@now_date.day}", :sum_type => "month" ) -%></span><br />
+18: 
+19: <br />
+20: 
+
+    app/views/layouts/base.html.erb:17
+
+Rendered rescues/_trace (72.4ms)
+Rendered rescues/_request_and_response (0.8ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 05:46:34) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;35;1mItem Load (0.8ms)[0m   [0mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 10[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+
+ActionView::TemplateError (private method `now' called for Date:Class) on line #17 of app/views/layouts/base.html.erb:
+14: 
+15: <br />
+16: 
+17: <span class="now_date"><%= link_to( "今月", :controller => "total", :action=>'amount', :date => Date.now, :sum_type => "month" ) -%></span><br />
+18: 
+19: <br />
+20: 
+
+    app/views/layouts/base.html.erb:17
+
+Rendered rescues/_trace (72.1ms)
+Rendered rescues/_request_and_response (0.2ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 05:48:10) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;36;1mItem Load (0.8ms)[0m   [0;1mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 10[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 29ms (View: 24, DB: 1) | 200 OK [http://localhost/?sum_type=all]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 05:48:17) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-01-10"}
+  [4;35;1mItem Load (0.3ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 19ms (View: 14, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 05:48:33) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-01-10"}
+  [4;36;1mItem Load (0.3ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 24ms (View: 18, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 05:48:35) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-01-10"}
+  [4;35;1mItem Load (0.3ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 20ms (View: 15, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 05:48:39) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-01-10"}
+  [4;36;1mItem Load (0.3ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 20ms (View: 14, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 05:49:30) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-01-10"}
+  [4;35;1mItem Load (0.3ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 25ms (View: 18, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 05:49:49) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-01-10"}
+  [4;36;1mItem Load (0.3ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 25ms (View: 19, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 05:49:52) [GET]
+  Parameters: {"sum_type"=>"day", "date"=>"2011-01-10"}
+  [4;35;1mItem Load (0.3ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at = '2011-01-10') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at = '2011-01-10') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at = '2011-01-10') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 19ms (View: 14, DB: 0) | 200 OK [http://localhost/?date=2011-01-10&sum_type=day]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 05:49:54) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-01-10"}
+  [4;36;1mItem Load (0.3ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 58ms (View: 53, DB: 0) | 200 OK [http://localhost/?date=2011-01-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 05:49:55) [GET]
+  Parameters: {"sum_type"=>"year", "date"=>"2011-01-10"}
+  [4;35;1mItem Load (0.3ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at < '2012-01-01') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at < '2012-01-01') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at < '2012-01-01') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 21ms (View: 15, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=year]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 05:49:57) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-01-10"}
+  [4;36;1mItem Load (0.3ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 21ms (View: 15, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 05:49:58) [GET]
+  Parameters: {"sum_type"=>"day", "date"=>"2011-01-10"}
+  [4;35;1mItem Load (0.3ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at = '2011-01-10') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at = '2011-01-10') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at = '2011-01-10') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 19ms (View: 14, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=day]
+
+
+Processing ItemsController#new (for 127.0.0.1 at 2011-01-10 05:50:02) [GET]
+Rendering template within layouts/base
+Rendering items/new
+Completed in 115ms (View: 112, DB: 0) | 200 OK [http://localhost/items/new]
+
+
+Processing ItemsController#create (for 127.0.0.1 at 2011-01-10 05:53:44) [POST]
+  Parameters: {"commit"=>"作成", "authenticity_token"=>"XZ5RJ9QE9nlcaet4Obvv9wSTBgm3Ni1OBhgtEwiy86I=", "item"=>{"price"=>"10,00 99", "name"=>"テスト", "happen_at(1i)"=>"2011", "happen_at(2i)"=>"1", "happen_at(3i)"=>"10", "item_type"=>"expense"}}
+
+NoMethodError (private method `gsub' called for 10:Fixnum):
+  app/controllers/items_controller.rb:46:in `create'
+
+Rendered rescues/_trace (25.3ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing ItemsController#create (for 127.0.0.1 at 2011-01-10 05:54:05) [POST]
+  Parameters: {"commit"=>"作成", "authenticity_token"=>"XZ5RJ9QE9nlcaet4Obvv9wSTBgm3Ni1OBhgtEwiy86I=", "item"=>{"price"=>"10,00 99", "name"=>"テスト", "happen_at(1i)"=>"2011", "happen_at(2i)"=>"1", "happen_at(3i)"=>"10", "item_type"=>"expense"}}
+  [4;36;1mItem Create (0.3ms)[0m   [0;1mINSERT INTO "items" ("name", "price", "created_at", "updated_at", "cycle", "cycle_mode", "happen_at", "item_type") VALUES('テスト', 10, '2011-01-09 20:54:05', '2011-01-09 20:54:05', NULL, NULL, '2011-01-10', 'expense')[0m
+Redirected to http://localhost:3000/?sum_type=all
+Completed in 8ms (DB: 0) | 302 Found [http://localhost/items/create]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 05:54:06) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;35;1mItem Load (1.0ms)[0m   [0mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 10[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 31ms (View: 25, DB: 1) | 200 OK [http://localhost/?sum_type=all]
+
+
+Processing ItemsController#new (for 127.0.0.1 at 2011-01-10 05:55:58) [GET]
+Rendering template within layouts/base
+Rendering items/new
+Completed in 23ms (View: 19, DB: 0) | 200 OK [http://localhost/items/new]
+
+
+Processing ItemsController#create (for 127.0.0.1 at 2011-01-10 05:56:09) [POST]
+  Parameters: {"commit"=>"作成", "authenticity_token"=>"XZ5RJ9QE9nlcaet4Obvv9wSTBgm3Ni1OBhgtEwiy86I=", "item"=>{"price"=>"99,99 99", "name"=>"テスト", "happen_at(1i)"=>"2011", "happen_at(2i)"=>"1", "happen_at(3i)"=>"10", "item_type"=>"expense"}}
+  [4;36;1mItem Create (0.3ms)[0m   [0;1mINSERT INTO "items" ("name", "price", "created_at", "updated_at", "cycle", "cycle_mode", "happen_at", "item_type") VALUES('テスト', 999999, '2011-01-09 20:56:09', '2011-01-09 20:56:09', NULL, NULL, '2011-01-10', 'expense')[0m
+Redirected to http://localhost:3000/?sum_type=all
+Completed in 8ms (DB: 0) | 302 Found [http://localhost/items/create]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 05:56:09) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;35;1mItem Load (0.9ms)[0m   [0mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 10[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 28ms (View: 23, DB: 1) | 200 OK [http://localhost/?sum_type=all]
+
+
+Processing ItemsController#edit (for 127.0.0.1 at 2011-01-10 05:57:51) [GET]
+  Parameters: {"id"=>"17"}
+  [4;36;1mItem Load (0.2ms)[0m   [0;1mSELECT * FROM "items" WHERE ("items"."id" = 17) [0m
+Rendering template within layouts/base
+Rendering items/edit
+Completed in 26ms (View: 21, DB: 0) | 200 OK [http://localhost/items/edit/17]
+
+
+Processing ItemsController#update (for 127.0.0.1 at 2011-01-10 05:58:07) [PUT]
+  Parameters: {"commit"=>"保存", "authenticity_token"=>"XZ5RJ9QE9nlcaet4Obvv9wSTBgm3Ni1OBhgtEwiy86I=", "id"=>"17", "item"=>{"price"=>"99,11 22", "name"=>"テスト", "happen_at(1i)"=>"2011", "happen_at(2i)"=>"1", "happen_at(3i)"=>"10", "item_type"=>"expense"}}
+  [4;35;1mItem Load (0.2ms)[0m   [0mSELECT * FROM "items" WHERE ("items"."id" = 17) [0m
+  [4;36;1mItem Update (0.2ms)[0m   [0;1mUPDATE "items" SET "updated_at" = '2011-01-09 20:58:07', "price" = 991122 WHERE "id" = 17[0m
+Redirected to http://localhost:3000/?sum_type=all
+Completed in 33ms (DB: 0) | 302 Found [http://localhost/items/update/17]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 05:58:07) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;35;1mItem Load (0.9ms)[0m   [0mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 10[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 28ms (View: 23, DB: 1) | 200 OK [http://localhost/?sum_type=all]
+
+
+Processing ItemsController#show (for 127.0.0.1 at 2011-01-10 05:58:27) [GET]
+  Parameters: {"id"=>"17"}
+  [4;36;1mItem Load (0.2ms)[0m   [0;1mSELECT * FROM "items" WHERE ("items"."id" = 17) [0m
+Rendering template within layouts/base
+Rendering items/show
+Completed in 21ms (View: 16, DB: 0) | 200 OK [http://localhost/items/show/17]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 05:58:33) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;35;1mItem Load (0.8ms)[0m   [0mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 10[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 26ms (View: 22, DB: 1) | 200 OK [http://localhost/?sum_type=all]
+
+
+Processing ItemsController#show (for 127.0.0.1 at 2011-01-10 05:59:26) [GET]
+  Parameters: {"id"=>"17"}
+  [4;36;1mItem Load (0.2ms)[0m   [0;1mSELECT * FROM "items" WHERE ("items"."id" = 17) [0m
+Rendering template within layouts/base
+Rendering items/show
+Completed in 22ms (View: 17, DB: 0) | 200 OK [http://localhost/items/show/17]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 05:59:29) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;35;1mItem Load (0.8ms)[0m   [0mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 10[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 65ms (View: 60, DB: 1) | 200 OK [http://localhost/?sum_type=all]
+
+
+Processing ItemsController#show (for 127.0.0.1 at 2011-01-10 05:59:42) [GET]
+  Parameters: {"id"=>"17"}
+  [4;36;1mItem Load (0.2ms)[0m   [0;1mSELECT * FROM "items" WHERE ("items"."id" = 17) [0m
+Rendering template within layouts/base
+Rendering items/show
+Completed in 25ms (View: 20, DB: 0) | 200 OK [http://localhost/items/show/17]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 05:59:52) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;35;1mItem Load (0.9ms)[0m   [0mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 10[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 27ms (View: 21, DB: 1) | 200 OK [http://localhost/?sum_type=all]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:00:09) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-6-10"}
+  [4;36;1mItem Load (0.3ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at >= '2011-06-01' AND happen_at <= '2011-06-30') ORDER BY happen_at ASC, id ASC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-06-01' AND happen_at <= '2011-06-30') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-06-01' AND happen_at <= '2011-06-30') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 19ms (View: 14, DB: 0) | 200 OK [http://localhost/?date=2011-6-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:02:15) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-6-10"}
+  [4;35;1mItem Load (0.4ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2011-06-01' AND happen_at <= '2011-06-30') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-06-01' AND happen_at <= '2011-06-30') [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-06-01' AND happen_at <= '2011-06-30') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 26ms (View: 19, DB: 1) | 200 OK [http://localhost/?date=2011-6-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:02:17) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-01-10"}
+  [4;36;1mItem Load (0.5ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 23ms (View: 17, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=month]
+
+
+Processing ItemsController#show (for 127.0.0.1 at 2011-01-10 06:02:21) [GET]
+  Parameters: {"id"=>"16", "date"=>"2011-01-10"}
+  [4;35;1mItem Load (0.2ms)[0m   [0mSELECT * FROM "items" WHERE ("items"."id" = 16) [0m
+Rendering template within layouts/base
+Rendering items/show
+Completed in 20ms (View: 15, DB: 0) | 200 OK [http://localhost/items/show/16?date=2011-01-10]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:02:39) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;36;1mItem Load (0.8ms)[0m   [0;1mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 10[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 28ms (View: 23, DB: 1) | 200 OK [http://localhost/?sum_type=all]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:02:46) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-01-10"}
+  [4;35;1mItem Load (0.5ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 23ms (View: 17, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=month]
+
+
+Processing ItemsController#show (for 127.0.0.1 at 2011-01-10 06:02:53) [GET]
+  Parameters: {"id"=>"16", "date"=>"2011-01-10"}
+  [4;36;1mItem Load (0.2ms)[0m   [0;1mSELECT * FROM "items" WHERE ("items"."id" = 16) [0m
+Rendering template within layouts/base
+Rendering items/show
+Completed in 60ms (View: 55, DB: 0) | 200 OK [http://localhost/items/show/16?date=2011-01-10]
+
+
+Processing ItemsController#show (for 127.0.0.1 at 2011-01-10 06:03:52) [GET]
+  Parameters: {"id"=>"16", "date"=>"2011-01-10"}
+  [4;35;1mItem Load (0.2ms)[0m   [0mSELECT * FROM "items" WHERE ("items"."id" = 16) [0m
+Rendering template within layouts/base
+Rendering items/show
+Completed in 20ms (View: 15, DB: 0) | 200 OK [http://localhost/items/show/16?date=2011-01-10]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:03:58) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;36;1mItem Load (0.8ms)[0m   [0;1mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 10[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 29ms (View: 24, DB: 1) | 200 OK [http://localhost/?sum_type=all]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:05:13) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-01-10"}
+  [4;35;1mItem Load (0.5ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 23ms (View: 17, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=month]
+
+
+Processing ItemsController#show (for 127.0.0.1 at 2011-01-10 06:05:15) [GET]
+  Parameters: {"id"=>"16", "date"=>"2011-01-10"}
+  [4;36;1mItem Load (0.2ms)[0m   [0;1mSELECT * FROM "items" WHERE ("items"."id" = 16) [0m
+Rendering template within layouts/base
+Rendering items/show
+Completed in 22ms (View: 17, DB: 0) | 200 OK [http://localhost/items/show/16?date=2011-01-10]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:05:17) [GET]
+  Parameters: {"sum_type"=>"all", "date"=>"2011-01-10"}
+  [4;35;1mItem Load (0.9ms)[0m   [0mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 10[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 29ms (View: 23, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=all]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:05:42) [GET]
+  Parameters: {"sum_type"=>"all", "date"=>"2011-01-10"}
+  [4;36;1mItem Load (0.9ms)[0m   [0;1mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 10[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 29ms (View: 24, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=all]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:06:19) [GET]
+  Parameters: {"sum_type"=>"all", "date"=>"2011-01-10"}
+  [4;35;1mItem Load (0.9ms)[0m   [0mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 10[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 29ms (View: 24, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=all]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:06:30) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-01-10"}
+  [4;36;1mItem Load (0.7ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 27ms (View: 18, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=month]
+
+
+Processing ItemsController#show (for 127.0.0.1 at 2011-01-10 06:09:22) [GET]
+  Parameters: {"id"=>"16", "date"=>"2011-01-10"}
+  [4;35;1mItem Load (0.3ms)[0m   [0mSELECT * FROM "items" WHERE ("items"."id" = 16) [0m
+Rendering template within layouts/base
+Rendering items/show
+Completed in 63ms (View: 18, DB: 0) | 200 OK [http://localhost/items/show/16?date=2011-01-10]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:09:25) [GET]
+  Parameters: {"date"=>"2011-01-10"}
+  [4;36;1mItem Load (0.8ms)[0m   [0;1mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 10[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 33ms (View: 28, DB: 1) | 200 OK [http://localhost/?date=2011-01-10]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:09:27) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-01-10"}
+  [4;35;1mItem Load (0.4ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 23ms (View: 17, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=month]
+
+
+Processing ItemsController#show (for 127.0.0.1 at 2011-01-10 06:09:30) [GET]
+  Parameters: {"sum_type"=>"month", "id"=>"16", "date"=>"2011-01-10"}
+  [4;36;1mItem Load (0.2ms)[0m   [0;1mSELECT * FROM "items" WHERE ("items"."id" = 16) [0m
+Rendering template within layouts/base
+Rendering items/show
+Completed in 21ms (View: 16, DB: 0) | 200 OK [http://localhost/items/show/16?date=2011-01-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:09:32) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-01-10"}
+  [4;35;1mItem Load (0.5ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 70ms (View: 63, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:09:39) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-8-10"}
+  [4;36;1mItem Load (0.3ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at >= '2011-08-01' AND happen_at <= '2011-08-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-08-01' AND happen_at <= '2011-08-31') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-08-01' AND happen_at <= '2011-08-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 19ms (View: 14, DB: 0) | 200 OK [http://localhost/?date=2011-8-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:09:40) [GET]
+  Parameters: {"sum_type"=>"year", "date"=>"2012-08-10"}
+  [4;35;1mItem Load (0.3ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2012-01-01' AND happen_at < '2013-01-01') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2012-01-01' AND happen_at < '2013-01-01') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2012-01-01' AND happen_at < '2013-01-01') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 21ms (View: 15, DB: 1) | 200 OK [http://localhost/?date=2012-08-10&sum_type=year]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:09:41) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2012-5-10"}
+  [4;36;1mItem Load (0.3ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at >= '2012-05-01' AND happen_at <= '2012-05-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2012-05-01' AND happen_at <= '2012-05-31') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2012-05-01' AND happen_at <= '2012-05-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 19ms (View: 14, DB: 0) | 200 OK [http://localhost/?date=2012-5-10&sum_type=month]
+
+
+Processing ItemsController#new (for 127.0.0.1 at 2011-01-10 06:09:43) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2012-05-10"}
+Rendering template within layouts/base
+Rendering items/new
+Completed in 25ms (View: 22, DB: 0) | 200 OK [http://localhost/items/new?date=2012-05-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:10:14) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;35;1mItem Load (0.9ms)[0m   [0mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 10[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 71ms (View: 66, DB: 1) | 200 OK [http://localhost/?sum_type=all]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:10:15) [GET]
+  Parameters: {"sum_type"=>"year", "date"=>"2012-01-10"}
+  [4;36;1mItem Load (0.3ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at >= '2012-01-01' AND happen_at < '2013-01-01') ORDER BY happen_at ASC, id ASC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2012-01-01' AND happen_at < '2013-01-01') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2012-01-01' AND happen_at < '2013-01-01') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 20ms (View: 14, DB: 1) | 200 OK [http://localhost/?date=2012-01-10&sum_type=year]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:10:16) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2012-5-10"}
+  [4;35;1mItem Load (0.3ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2012-05-01' AND happen_at <= '2012-05-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2012-05-01' AND happen_at <= '2012-05-31') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2012-05-01' AND happen_at <= '2012-05-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 19ms (View: 14, DB: 1) | 200 OK [http://localhost/?date=2012-5-10&sum_type=month]
+
+
+Processing ItemsController#new (for 127.0.0.1 at 2011-01-10 06:10:17) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2012-05-10"}
+Rendering template within layouts/base
+Rendering items/new
+Completed in 26ms (View: 22, DB: 0) | 200 OK [http://localhost/items/new?date=2012-05-10&sum_type=month]
+
+
+Processing ItemsController#create (for 127.0.0.1 at 2011-01-10 06:10:26) [POST]
+  Parameters: {"commit"=>"作成", "sum_type"=>"month", "authenticity_token"=>"XZ5RJ9QE9nlcaet4Obvv9wSTBgm3Ni1OBhgtEwiy86I=", "date"=>"2012-05-10", "item"=>{"price"=>"100", "name"=>"テスト", "happen_at(1i)"=>"2011", "happen_at(2i)"=>"1", "happen_at(3i)"=>"10", "item_type"=>"expense"}}
+  [4;36;1mItem Create (0.2ms)[0m   [0;1mINSERT INTO "items" ("name", "price", "created_at", "updated_at", "cycle", "cycle_mode", "happen_at", "item_type") VALUES('テスト', 100, '2011-01-09 21:10:26', '2011-01-09 21:10:26', NULL, NULL, '2011-01-10', 'expense')[0m
+Redirected to http://localhost:3000/?sum_type=all
+Completed in 8ms (DB: 0) | 302 Found [http://localhost/items/create?date=2012-05-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:10:26) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;35;1mItem Load (0.9ms)[0m   [0mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 10[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 70ms (View: 25, DB: 1) | 200 OK [http://localhost/?sum_type=all]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:10:59) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-01-10"}
+  [4;36;1mItem Load (0.5ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 24ms (View: 18, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:11:00) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-7-10"}
+  [4;35;1mItem Load (0.3ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2011-07-01' AND happen_at <= '2011-07-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-07-01' AND happen_at <= '2011-07-31') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-07-01' AND happen_at <= '2011-07-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 19ms (View: 14, DB: 0) | 200 OK [http://localhost/?date=2011-7-10&sum_type=month]
+
+
+Processing ItemsController#new (for 127.0.0.1 at 2011-01-10 06:11:01) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-07-10"}
+Rendering template within layouts/base
+Rendering items/new
+Completed in 24ms (View: 20, DB: 0) | 200 OK [http://localhost/items/new?date=2011-07-10&sum_type=month]
+
+
+Processing ItemsController#create (for 127.0.0.1 at 2011-01-10 06:11:06) [POST]
+  Parameters: {"commit"=>"作成", "sum_type"=>"month", "authenticity_token"=>"XZ5RJ9QE9nlcaet4Obvv9wSTBgm3Ni1OBhgtEwiy86I=", "date"=>"2011-07-10", "item"=>{"price"=>"200", "name"=>"テスト", "happen_at(1i)"=>"2011", "happen_at(2i)"=>"1", "happen_at(3i)"=>"10", "item_type"=>"expense"}}
+  [4;36;1mItem Create (0.3ms)[0m   [0;1mINSERT INTO "items" ("name", "price", "created_at", "updated_at", "cycle", "cycle_mode", "happen_at", "item_type") VALUES('テスト', 200, '2011-01-09 21:11:06', '2011-01-09 21:11:06', NULL, NULL, '2011-01-10', 'expense')[0m
+Redirected to http://localhost:3000/?sum_type=month
+Completed in 32ms (DB: 0) | 302 Found [http://localhost/items/create?date=2011-07-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:11:07) [GET]
+  Parameters: {"sum_type"=>"month"}
+  [4;35;1mItem Load (0.6ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 67ms (View: 20, DB: 1) | 200 OK [http://localhost/?sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:11:57) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-01-10"}
+  [4;36;1mItem Load (0.6ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 25ms (View: 19, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:11:58) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-8-10"}
+  [4;35;1mItem Load (0.3ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2011-08-01' AND happen_at <= '2011-08-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-08-01' AND happen_at <= '2011-08-31') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-08-01' AND happen_at <= '2011-08-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 20ms (View: 14, DB: 1) | 200 OK [http://localhost/?date=2011-8-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:12:00) [GET]
+  Parameters: {"sum_type"=>"year", "date"=>"2012-08-10"}
+  [4;36;1mItem Load (0.3ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at >= '2012-01-01' AND happen_at < '2013-01-01') ORDER BY happen_at ASC, id ASC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2012-01-01' AND happen_at < '2013-01-01') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2012-01-01' AND happen_at < '2013-01-01') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 19ms (View: 14, DB: 0) | 200 OK [http://localhost/?date=2012-08-10&sum_type=year]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:12:01) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2012-5-10"}
+  [4;35;1mItem Load (0.3ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2012-05-01' AND happen_at <= '2012-05-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2012-05-01' AND happen_at <= '2012-05-31') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2012-05-01' AND happen_at <= '2012-05-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 20ms (View: 14, DB: 1) | 200 OK [http://localhost/?date=2012-5-10&sum_type=month]
+
+
+Processing ItemsController#new (for 127.0.0.1 at 2011-01-10 06:12:02) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2012-05-10"}
+Rendering template within layouts/base
+Rendering items/new
+Completed in 22ms (View: 18, DB: 0) | 200 OK [http://localhost/items/new?date=2012-05-10&sum_type=month]
+
+
+Processing ItemsController#create (for 127.0.0.1 at 2011-01-10 06:12:10) [POST]
+  Parameters: {"commit"=>"作成", "sum_type"=>"month", "authenticity_token"=>"XZ5RJ9QE9nlcaet4Obvv9wSTBgm3Ni1OBhgtEwiy86I=", "date"=>"2012-05-10", "item"=>{"price"=>"100", "name"=>"テスト", "happen_at(1i)"=>"2011", "happen_at(2i)"=>"1", "happen_at(3i)"=>"10", "item_type"=>"expense"}}
+  [4;36;1mItem Create (0.2ms)[0m   [0;1mINSERT INTO "items" ("name", "price", "created_at", "updated_at", "cycle", "cycle_mode", "happen_at", "item_type") VALUES('テスト', 100, '2011-01-09 21:12:10', '2011-01-09 21:12:10', NULL, NULL, '2011-01-10', 'expense')[0m
+Redirected to http://localhost:3000/?date=2012-05-10&sum_type=month
+Completed in 8ms (DB: 0) | 302 Found [http://localhost/items/create?date=2012-05-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:12:10) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2012-05-10"}
+  [4;35;1mItem Load (0.3ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2012-05-01' AND happen_at <= '2012-05-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2012-05-01' AND happen_at <= '2012-05-31') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2012-05-01' AND happen_at <= '2012-05-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 20ms (View: 14, DB: 1) | 200 OK [http://localhost/?date=2012-05-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:12:14) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-01-10"}
+  [4;36;1mItem Load (0.6ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 26ms (View: 20, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:12:18) [GET]
+  Parameters: {"sum_type"=>"year", "date"=>"2011-01-10"}
+  [4;35;1mItem Load (0.6ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at < '2012-01-01') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at < '2012-01-01') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at < '2012-01-01') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 27ms (View: 21, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=year]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:12:19) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-01-10"}
+  [4;36;1mItem Load (0.6ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 26ms (View: 20, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:12:20) [GET]
+  Parameters: {"sum_type"=>"day", "date"=>"2011-01-10"}
+  [4;35;1mItem Load (0.6ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at = '2011-01-10') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at = '2011-01-10') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at = '2011-01-10') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 26ms (View: 21, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=day]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:12:21) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-01-10"}
+  [4;36;1mItem Load (0.6ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 27ms (View: 20, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:12:24) [GET]
+  Parameters: {"sum_type"=>"year", "date"=>"2011-01-10"}
+  [4;35;1mItem Load (0.6ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at < '2012-01-01') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at < '2012-01-01') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at < '2012-01-01') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 27ms (View: 21, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=year]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:12:57) [GET]
+  Parameters: {"sum_type"=>"year", "date"=>"2010-01-10"}
+  [4;36;1mItem Load (0.8ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at >= '2010-01-01' AND happen_at < '2011-01-01') ORDER BY happen_at ASC, id ASC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2010-01-01' AND happen_at < '2011-01-01') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2010-01-01' AND happen_at < '2011-01-01') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 70ms (View: 63, DB: 1) | 200 OK [http://localhost/?date=2010-01-10&sum_type=year]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:13:01) [GET]
+  Parameters: {"sum_type"=>"year", "date"=>"2011-01-10"}
+  [4;35;1mItem Load (0.6ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at < '2012-01-01') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at < '2012-01-01') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at < '2012-01-01') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 27ms (View: 21, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=year]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:13:04) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-01-10"}
+  [4;36;1mItem Load (0.7ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 29ms (View: 21, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:13:05) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-2-10"}
+  [4;35;1mItem Load (0.3ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2011-02-01' AND happen_at <= '2011-02-28') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-02-01' AND happen_at <= '2011-02-28') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-02-01' AND happen_at <= '2011-02-28') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 21ms (View: 15, DB: 1) | 200 OK [http://localhost/?date=2011-2-10&sum_type=month]
+
+
+Processing ItemsController#new (for 127.0.0.1 at 2011-01-10 06:13:08) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-02-10"}
+Rendering template within layouts/base
+Rendering items/new
+Completed in 22ms (View: 18, DB: 0) | 200 OK [http://localhost/items/new?date=2011-02-10&sum_type=month]
+
+
+Processing ItemsController#create (for 127.0.0.1 at 2011-01-10 06:13:22) [POST]
+  Parameters: {"commit"=>"作成", "sum_type"=>"month", "authenticity_token"=>"XZ5RJ9QE9nlcaet4Obvv9wSTBgm3Ni1OBhgtEwiy86I=", "date"=>"2011-02-10", "item"=>{"price"=>"2,0 0", "name"=>"テスト", "happen_at(1i)"=>"2011", "happen_at(2i)"=>"2", "happen_at(3i)"=>"10", "item_type"=>"expense"}}
+  [4;36;1mItem Create (0.3ms)[0m   [0;1mINSERT INTO "items" ("name", "price", "created_at", "updated_at", "cycle", "cycle_mode", "happen_at", "item_type") VALUES('テスト', 200, '2011-01-09 21:13:22', '2011-01-09 21:13:22', NULL, NULL, '2011-02-10', 'expense')[0m
+Redirected to http://localhost:3000/?date=2011-02-10&sum_type=month
+Completed in 9ms (DB: 0) | 302 Found [http://localhost/items/create?date=2011-02-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:13:22) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-02-10"}
+  [4;35;1mItem Load (0.4ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2011-02-01' AND happen_at <= '2011-02-28') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-02-01' AND happen_at <= '2011-02-28') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-02-01' AND happen_at <= '2011-02-28') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 21ms (View: 15, DB: 1) | 200 OK [http://localhost/?date=2011-02-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:13:38) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-4-10"}
+  [4;36;1mItem Load (0.3ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at >= '2011-04-01' AND happen_at <= '2011-04-30') ORDER BY happen_at ASC, id ASC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-04-01' AND happen_at <= '2011-04-30') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-04-01' AND happen_at <= '2011-04-30') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 19ms (View: 14, DB: 1) | 200 OK [http://localhost/?date=2011-4-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:13:39) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-5-10"}
+  [4;35;1mItem Load (0.3ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2011-05-01' AND happen_at <= '2011-05-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-05-01' AND happen_at <= '2011-05-31') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-05-01' AND happen_at <= '2011-05-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 20ms (View: 14, DB: 1) | 200 OK [http://localhost/?date=2011-5-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:14:48) [GET]
+  [4;36;1mItem Load (0.9ms)[0m   [0;1mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 10[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 30ms (View: 24, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:17:33) [GET]
+  [4;35;1mItem Load (0.6ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 65ms (View: 20, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:17:44) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;36;1mItem Load (0.8ms)[0m   [0;1mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 10[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 45ms (View: 27, DB: 1) | 200 OK [http://localhost/?sum_type=all]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:17:56) [GET]
+  Parameters: {"sum_type"=>"month", "date"=>"2011-01-10"}
+  [4;35;1mItem Load (0.6ms)[0m   [0mSELECT * FROM "items" WHERE (happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') ORDER BY happen_at ASC, id ASC[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at <= '2011-01-31') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 28ms (View: 22, DB: 1) | 200 OK [http://localhost/?date=2011-01-10&sum_type=month]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-01-10 06:18:00) [GET]
+  Parameters: {"sum_type"=>"all"}
+  [4;36;1mItem Load (0.8ms)[0m   [0;1mSELECT * FROM "items" ORDER BY happen_at DESC, id DESC LIMIT 10[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income') LIMIT 100[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense') LIMIT 100[0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 29ms (View: 25, DB: 1) | 200 OK [http://localhost/?sum_type=all]
+
+
+Processing SummaryController#list (for 127.0.0.1 at 2011-01-10 06:18:08) [GET]
+  [4;35;1mItem Load (0.5ms)[0m   [0mSELECT * FROM "items" ORDER BY happen_at ASC LIMIT 1[0m
+  [4;36;1mItem Load (0.2ms)[0m   [0;1mSELECT * FROM "items" ORDER BY happen_at DESC LIMIT 1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2009-01-01' AND happen_at < '2010-01-01') [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2009-01-01' AND happen_at < '2010-01-01') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2010-01-01' AND happen_at < '2011-01-01') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2010-01-01' AND happen_at < '2011-01-01') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-01-01' AND happen_at < '2012-01-01') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-01-01' AND happen_at < '2012-01-01') [0m
+Rendering template within layouts/summary
+Rendering summary/list
+Completed in 63ms (View: 11, DB: 2) | 200 OK [http://localhost/summary]

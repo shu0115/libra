@@ -8,6 +8,9 @@ class ItemsController < ApplicationController
   # show #
   #------#
   def show
+    @now_date = date_set( :date => params[:date] )
+    @sum_type = params[:sum_type] unless params[:sum_type].blank?
+
     @item = Item.find( params[:id] )
     if @item.item_type == "income"
       @item_type = "収入"
@@ -20,6 +23,9 @@ class ItemsController < ApplicationController
   # new #
   #-----#
   def new
+    @now_date = date_set( :date => params[:date] )
+    @sum_type = params[:sum_type] unless params[:sum_type].blank?
+
     @item = Item.new
   end
 
@@ -27,6 +33,9 @@ class ItemsController < ApplicationController
   # edit #
   #------#
   def edit
+    @now_date = date_set( :date => params[:date] )
+    @sum_type = params[:sum_type] unless params[:sum_type].blank?
+
     @item = Item.find( params[:id] )
     if @item.item_type == "income"
       @item_type_income = true
@@ -39,11 +48,17 @@ class ItemsController < ApplicationController
   # create #
   #--------#
   def create
+    @now_date = date_set( :date => params[:date] )
+    @sum_type = params[:sum_type] unless params[:sum_type].blank?
+
+    params[:item][:price] = params[:item][:price].gsub( ",", "" )  # カンマを削除
+    params[:item][:price] = params[:item][:price].gsub( " ", "" )  # 半角空白を削除
+
     @item = Item.new( params[:item] )
 
     if @item.save
       flash[:notice] = '品目の新規作成が完了しました。'
-      redirect_to :controller => "total", :action => "amount", :sum_type => "all"
+      redirect_to :controller => "total", :action => "amount", :sum_type => @sum_type, :date=> @now_date
     else
       redirect_to :action => "new"
     end
@@ -53,11 +68,17 @@ class ItemsController < ApplicationController
   # update #
   #--------#
   def update
+    @now_date = date_set( :date => params[:date] )
+    @sum_type = params[:sum_type] unless params[:sum_type].blank?
+
     @item = Item.find( params[:id] )
+
+    params[:item][:price] = params[:item][:price].gsub( ",", "" )  # カンマを削除
+    params[:item][:price] = params[:item][:price].gsub( " ", "" )  # 半角空白を削除
 
     if @item.update_attributes( params[:item] )
       flash[:notice] = '品目の更新が完了しました。'
-      redirect_to :controller => "total", :action => "amount", :sum_type => "all"
+      redirect_to :controller => "total", :action => "amount", :sum_type => @sum_type, :date=> @now_date
     else
       redirect_to :action => "edit"
     end
@@ -67,10 +88,13 @@ class ItemsController < ApplicationController
   # destroy #
   #---------#
   def destroy
+    @now_date = date_set( :date => params[:date] )
+    @sum_type = params[:sum_type] unless params[:sum_type].blank?
+
     @item = Item.find( params[:id] )
     @item.destroy
 
-    redirect_to :controller => "total", :action => "amount", :sum_type => "all"
+    redirect_to :controller => "total", :action => "amount", :sum_type => @sum_type, :date=> @now_date
   end
 
 end

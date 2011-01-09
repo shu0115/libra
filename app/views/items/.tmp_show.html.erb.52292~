@@ -22,7 +22,7 @@
 
 <p>
   <b>金額:</b>
-	<%=h number_with_delimiter( @item.price ) %>円
+  <%=h @item.price %>
 </p>
 
 <p>
@@ -31,5 +31,5 @@
 </p>
 
 
-<%= link_to '編集', :action => "edit", :id => @item.id, :sum_type => @sum_type, :date=> @now_date %>
- | <%= link_to '一覧', :controller => "total", :action => "amount", :sum_type => @sum_type, :date=> @now_date %>
+<%= link_to '編集', :action => "edit", :id => @item.id %>
+ | <%= link_to '一覧', :controller => "total", :action => "amount", :sum_type => "all" %>

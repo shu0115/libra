@@ -43,9 +43,9 @@
 			<td><%=h item.happen_at.strftime( "%Y/%m/%d" ) unless item.happen_at.blank? %></td>
 
 			<!-- リンク -->
-			<td><%= link_to '閲覧', :controller => "items", :action => "show", :id => item.id, :sum_type => @sum_type, :date=> @now_date %></td>
-			<td><%= link_to '編集', :controller => "items", :action => "edit", :id => item.id, :sum_type => @sum_type, :date=> @now_date %></td>
-			<td><%= link_to '削除', { :controller => "items", :action => "destroy", :id => item.id, :sum_type => @sum_type, :date=> @now_date }, :confirm => '本当に削除してよろしいですか?' %></td>
+			<td><%= link_to '閲覧', :controller => "items", :action => "show", :id => item.id %></td>
+			<td><%= link_to '編集', :controller => "items", :action => "edit", :id => item.id %></td>
+			<td><%= link_to '削除', { :controller => "items", :action => "destroy", :id => item.id }, :confirm => '本当に削除してよろしいですか?' %></td>
 		</tr>
 	<% } # each_with_index - END %>
 <% end %>
@@ -75,6 +75,6 @@
 
 <br />
 
-<%= link_to '新規作成', :controller => "items", :action => "new", :sum_type => @sum_type, :date=> @now_date %><br />
+<%= link_to '新規作成', :controller => "items", :action => "new" %><br />
 
 <br />
