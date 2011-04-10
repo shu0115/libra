@@ -18,7 +18,7 @@
 
   <br />
 
-  <%= f.submit '登録' %>
+  <%= f.submit "登録", :disable_with => "登録" %>
 <% end %>
 
 <% form_for :user, :url => { :controller => "entry", :action => "input" } do |f| %>
@@ -26,7 +26,7 @@
   <%= f.hidden_field :password, :value => @user.password %>
   <%= f.hidden_field :display_name, :value => @user.display_name %>
   <%= f.hidden_field :twitter_id, :value => @user.twitter_id %>
-  <%= f.submit '戻る' %>
+  <%= f.submit "戻る", :disable_with => "戻る" %>
 <% end %>
 
 <br />
