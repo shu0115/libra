@@ -1,11 +1,12 @@
-<h1>Summary#list</h1>
+
+<!--<h1>Summary#list</h1>-->
 
 <table border="0">
 
 	<tr>
 		<th><%= @sum_type_title %></th>
-		<th>収入</th>
-		<th>支出</th>
+		<th style="color: blue;">収入</th>
+		<th style="color: red;">支出</th>
 		<th>合計</th>
 	</tr>
 
@@ -18,10 +19,10 @@
 			<td style="text-align: right"><%= value[0] %><%= @sum_type_title %></td>
 
 			<!-- 収入 -->
-			<td style="text-align: right"><%= value[1][:income] %></td>
+			<td style="text-align: right; color: blue;"><%= value[1][:income] %></td>
 
 			<!-- 支出 -->
-			<td style="text-align: right"><%= value[1][:expense] %></td>
+			<td style="text-align: right; color: red;"><%= value[1][:expense] %></td>
 
 			<!-- 合計 -->
 			<td style="text-align: right"><%= value[1][:amount] %></td>

@@ -1,15 +1,16 @@
-<h3>品目編集</h3>
 
 <%= error_messages_for :item %>
 
 <% form_for @item, :url => { :action => "update", :id => @item.id, :sum_type => @sum_type, :date=> @now_date } do |f| %>
   <p>
-    <b>品目名</b><br />
+    品目名<br />
     <%= f.text_field :name %>
   </p>
+  
+  <br />
 
   <p>
-    <b>収支タイプ</b><br />
+    収支タイプ<br />
 		<%#= f.select :item_type, [ ["収入", "income"], ["支出", "expense"] ] %>
 		<% print "【 @item.item_type 】>> " ; p @item.item_type ; %>
     <%= f.radio_button :item_type, "income", :checked => @item_type_income %><label for="item_item_type_income">収入</label>
@@ -23,20 +24,30 @@
   </p>
 <% end %>
 
+  <br />
+  
   <p>
-    <b>金額</b><br />
-    <%= f.text_field :price, :size => "20" %>
+    金額<br />
+    <%= f.text_field :price, :size => "20" %>円
   </p>
 
+  <br />
+
   <p>
-    <b>発生日</b><br />
+    発生日<br />
     <%= f.date_select :happen_at, :use_month_numbers => true %>
   </p>
 
+  <br />
+
   <p>
-    <%= f.submit "保存" %>
+    <%= f.submit t("menu.save") %>
   </p>
 <% end %>
 
-<%= link_to '閲覧', :action => "show", :id => @item.id, :sum_type => @sum_type, :date=> @now_date %>
- | <%= link_to '一覧', :controller => "total", :action => "amount", :sum_type => @sum_type, :date=> @now_date %>
+<br />
+
+<span class="menu">
+  <%= link_to t("total.amount"), :controller => "total", :action => "amount", :sum_type => @sum_type, :date=> @now_date %>
+  <%= link_to t("menu.show"), :action => "show", :id => @item.id, :sum_type => @sum_type, :date=> @now_date %>
+</span>

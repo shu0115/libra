@@ -7,22 +7,22 @@ class Item < ActiveRecord::Base
 
     if args[:sum_type] == "all"
       # 直近100件取得
-      items = Item.find( :all, :limit => "10", :order => "happen_at DESC, id DESC" )
+      items = Item.paginate( :all, :page => args[:page], :per_page => $per_page, :limit => "10", :order => "happen_at DESC, id DESC" )
       income = Item.sum( :price, :conditions => [ "item_type = 'income'" ], :limit => "100" )
       expense = Item.sum( :price, :conditions => [ "item_type = 'expense'" ], :limit => "100" )
     elsif args[:sum_type] == "year"
       # 指定された年の開始日～次の年の開始日の前日まで
-      items = Item.find( :all, :conditions => [ "happen_at >= ? AND happen_at < ?", args[:now_date].beginning_of_year, args[:now_date].next_year.beginning_of_year ], :order => "happen_at ASC, id ASC" )
+      items = Item.paginate( :all, :page => args[:page], :per_page => $per_page, :conditions => [ "happen_at >= ? AND happen_at < ?", args[:now_date].beginning_of_year, args[:now_date].next_year.beginning_of_year ], :order => "happen_at ASC, id ASC" )
       income = Item.sum( :price, :conditions => [ "item_type = 'income' AND happen_at >= ? AND happen_at < ?", args[:now_date].beginning_of_year, args[:now_date].next_year.beginning_of_year ] )
       expense = Item.sum( :price, :conditions => [ "item_type = 'expense' AND happen_at >= ? AND happen_at < ?", args[:now_date].beginning_of_year, args[:now_date].next_year.beginning_of_year ] )
     elsif args[:sum_type] == "month"
       # 指定された月の開始日～指定された月の末日まで
-      items = Item.find( :all, :conditions => [ "happen_at >= ? AND happen_at <= ?", args[:now_date].beginning_of_month, args[:now_date].end_of_month ], :order => "happen_at ASC, id ASC" )
+      items = Item.paginate( :all, :page => args[:page], :per_page => $per_page, :conditions => [ "happen_at >= ? AND happen_at <= ?", args[:now_date].beginning_of_month, args[:now_date].end_of_month ], :order => "happen_at ASC, id ASC" )
       income = Item.sum( :price, :conditions => [ "item_type = 'income' AND happen_at >= ? AND happen_at <= ?", args[:now_date].beginning_of_month, args[:now_date].end_of_month ] )
       expense = Item.sum( :price, :conditions => [ "item_type = 'expense' AND happen_at >= ? AND happen_at <= ?", args[:now_date].beginning_of_month, args[:now_date].end_of_month ] )
     elsif args[:sum_type] == "day"
       # 指定された日に一致するもの
-      items = Item.find( :all, :conditions => [ "happen_at = ?", args[:now_date] ], :order => "happen_at ASC, id ASC" )
+      items = Item.paginate( :all, :page => args[:page], :per_page => $per_page, :conditions => [ "happen_at = ?", args[:now_date] ], :order => "happen_at ASC, id ASC" )
       income = Item.sum( :price, :conditions => [ "item_type = 'income' AND happen_at = ?", args[:now_date] ] )
       expense = Item.sum( :price, :conditions => [ "item_type = 'expense' AND happen_at = ?", args[:now_date] ] )
     end

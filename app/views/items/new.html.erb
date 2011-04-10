@@ -1,4 +1,4 @@
-<h3>品目登録</h3>
+<!--<h3>品目登録</h3>-->
 
 <%= error_messages_for :item %>
 
@@ -8,6 +8,8 @@
     <%= f.text_field :name %>
   </p>
 
+  <br />
+  
   <p>
     <b>品目タイプ</b><br />
 		<%#= f.select :item_type, [ ["収入", "income"], ["支出", "expense"] ] %>
@@ -22,19 +24,27 @@
   </p>
 <% end %>
 
+  <br />
+  
   <p>
     <b>金額</b><br />
     <%= f.text_field :price, :size => "20" %>
   </p>
+
+  <br />
 
   <p>
     <b>発生日</b><br />
     <%= f.date_select :happen_at, :use_month_numbers => true %>
   </p>
 
+  <br />
+
   <p>
     <%= f.submit "作成" %>
   </p>
 <% end %>
 
-<%= link_to '一覧', :controller => "total", :action => "amount", :sum_type => @sum_type, :date=> @now_date %>
+  <br />
+
+<span class="menu"><%= link_to t("menu.list"), :controller => "total", :action => "amount", :sum_type => @sum_type, :date=> @now_date %></span>

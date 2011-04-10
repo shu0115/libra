@@ -1,12 +1,11 @@
 class TotalController < ApplicationController
 
-  layout "base"
+#  layout "base"
 
   #--------#
   # amount #
   #--------#
   def amount
-    print "【 params[:date] 】>> " ; p params[:date] ;
     @now_date = date_set( :date => params[:date] )
 
     @sum_type = "all"
@@ -17,7 +16,7 @@ class TotalController < ApplicationController
     end
 
     # 品目取得
-    @items, @income, @expense = Item.find_items( :now_date => @now_date, :sum_type => @sum_type )
+    @items, @income, @expense = Item.find_items( :now_date => @now_date, :sum_type => @sum_type, :page => params[:page] )
 
     # 合計算出
     @amount, @income, @expense = Item.sum_price( :income => @income, :expense => @expense )

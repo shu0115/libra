@@ -1,15 +1,83 @@
-<h1>Total#<%= @sum_type %></h1>
 
-<% if @sum_type == "year" %>
-	<p><%= @now_date.strftime( "%Y年" ) %></p>
-<% elsif @sum_type == "month" %>
-	<p><%= @now_date.strftime( "%Y年%m月" ) %></p>
-<% elsif @sum_type == "day" %>
-	<p><%= @now_date.strftime( "%Y年%m月%d日" ) %></p>
+<div class="pagination">
+
+<%= link_to( "今日", :controller => "total", :action => 'amount', :date => Date.new( Time.now.year, Time.now.month, Time.now.day ), :sum_type => "day" ) -%>
+　<%= link_to( "今月", :controller => "total", :action => 'amount', :date => Date.new( Time.now.year, Time.now.month, Time.now.day ), :sum_type => "month" ) -%>
+　<%= link_to( "今年", :controller => "total", :action => 'amount', :date => Date.new( Time.now.year, Time.now.month, Time.now.day ), :sum_type => "year" ) -%><br />
+
+<br />
+
+<%# 前年 %>
+<%= link_to( "#{(@now_date.last_year).year}年", :controller => "total", :action=>'amount', :date => (@now_date.last_year), :sum_type => "year" ) -%>
+<%# 今年 %>
+<% if @sum_type == "year" or @sum_type == "month" or @sum_type == "day" %>
+<span class="current"><%= "#{@now_date.year}年" -%></span>
+<% else %>
+<%= link_to( "#{@now_date.year}年", :controller => "total", :action=>'amount', :date => @now_date, :sum_type => "year" ) -%>
+<% end %>
+<%# 翌年 %>
+<%= link_to( "#{(@now_date.next_year).year}年", :controller => "total", :action=>'amount', :date => (@now_date.next_year), :sum_type => "year" ) -%>
+
+<br />
+<br />
+
+<%# 1月～12月まで %>
+<% 1.upto( 12 ) { |month| %>
+	<% if (@sum_type == "month" or @sum_type == "day") and @now_date.month == month %>
+  	<span class="current"><%= "#{month}月" -%></span>
+	<% else %>
+	  <%= link_to( "#{month}月", :controller => "total", :action=>'amount', :date => "#{@now_date.year}-#{month}-#{@now_date.day}", :sum_type => "month" ) -%>
+	<% end %>
+<% } %>
+
+<br />
+<br />
+
+<%# 1日～末日まで %>
+<% 1.upto(@now_date.end_of_month.day){ |day| %>
+	<% if @now_date.day == day %>
+		<%# 今日 %>
+		<% if @sum_type == "day" %>
+			<span class="current"><%= "#{day}" -%></span>
+		<% else %>
+			<%= link_to( "#{day}", :controller => "total", :action=>"amount", :date => @now_date, :sum_type => "day" ) -%>
+		<% end %>
+	<% else %>
+		<%# 今日以外 %>
+		<%= link_to( "#{day}", :controller => "total", :action=>"amount", :date => @now_date.change( :day => day ), :sum_type => "day" ) -%>
+	<% end %>
+<% } %>
+</div>
+
+<br />
+<br />
+
+<% if false %>
+<h1>Total#<%= @sum_type %></h1>
 <% end %>
 
+<% if @sum_type == "year" or @sum_type == "month" or @sum_type == "day" %>
 <table>
+	<tr>
+    <td>
+      <% if @sum_type == "year" %>
+        <p><%= @now_date.strftime( "%Y年" ) %></p>
+      <% elsif @sum_type == "month" %>
+      	<p><%= @now_date.strftime( "%Y年%m月" ) %></p>
+      <% elsif @sum_type == "day" %>
+      	<p><%= @now_date.strftime( "%Y年%m月%d日" ) %></p>
+      <% end %>
+    </td>
+  </tr>
+</table>
+<% end %>
 
+<br />
+
+<%# ページング %>
+<%= will_paginate @items, :previous_label => 'Prev', :next_label => 'Next', :params => { :action => "amount" } %>
+
+<table>
 	<tr>
 		<th>No.</th>
 		<th>品目</th>
@@ -37,44 +105,45 @@
 			<td><span style="color: <%= type_color %>;"><%=h $type_hash[item.item_type] %></span></td>
 
 			<!-- 金額 -->
-			<td class="text_right"><%= "-" if $type_hash[item.item_type] == "支出" %><%= number_with_delimiter( item.price ) %>円</td>
+			<td align="right"><%= "-" if $type_hash[item.item_type] == "支出" %><%= number_with_delimiter( item.price ) %>円</td>
 
 			<!-- 発生日 -->
 			<td><%=h item.happen_at.strftime( "%Y/%m/%d" ) unless item.happen_at.blank? %></td>
 
 			<!-- リンク -->
-			<td><%= link_to '閲覧', :controller => "items", :action => "show", :id => item.id, :sum_type => @sum_type, :date=> @now_date %></td>
-			<td><%= link_to '編集', :controller => "items", :action => "edit", :id => item.id, :sum_type => @sum_type, :date=> @now_date %></td>
-			<td><%= link_to '削除', { :controller => "items", :action => "destroy", :id => item.id, :sum_type => @sum_type, :date=> @now_date }, :confirm => '本当に削除してよろしいですか?' %></td>
+			<td class="menu"><%= link_to t("menu.show"), :controller => "items", :action => "show", :id => item.id, :sum_type => @sum_type, :date=> @now_date %></td>
+			<td class="menu"><%= link_to t("menu.edit"), :controller => "items", :action => "edit", :id => item.id, :sum_type => @sum_type, :date=> @now_date %></td>
+			<td class="menu"><%= link_to t("menu.delete"), { :controller => "items", :action => "destroy", :id => item.id, :sum_type => @sum_type, :date=> @now_date }, :confirm => '本当に削除してよろしいですか?' %></td>
 		</tr>
-	<% } # each_with_index - END %>
+	<% } %>
 <% end %>
-
 </table>
 
+<%# ページング %>
+<%= will_paginate @items, :previous_label => 'Prev', :next_label => 'Next', :params => { :action => "amount" } %>
+
+<br />
 <br />
 
 <table>
-
 	<tr>
-		<th>収入：</th>
-		<td class="text_right"><%= number_with_delimiter( @income ) %>円</td>
+		<th><span style="color: blue;">収入</span>：</th>
+		<td align="right"><%= number_with_delimiter( @income ) %>円</td>
 	</tr>
 
 	<tr>
-		<th>支出：</th>
-		<td class="text_right">-<%= number_with_delimiter( @expense ) %>円</td>
+		<th><span style="color: red;">支出</span>：</th>
+		<td align="right">-<%= number_with_delimiter( @expense ) %>円</td>
 	</tr>
 
 	<tr>
 		<th>合計：</th>
-		<td class="text_right"><%= number_with_delimiter( @amount ) %>円</td>
+		<td align="right"><%= number_with_delimiter( @amount ) %>円</td>
 	</tr>
-
 </table>
 
 <br />
 
-<%= link_to '新規作成', :controller => "items", :action => "new", :sum_type => @sum_type, :date=> @now_date %><br />
+<span class="menu"><%= link_to t("menu.new"), :controller => "items", :action => "new", :sum_type => @sum_type, :date=> @now_date %></span><br />
 
 <br />

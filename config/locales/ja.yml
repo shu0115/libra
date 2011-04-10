@@ -14,7 +14,8 @@ ja:
     entry: Entry
     public: Public
     create: 作成
-    update: 更新
+    #update: 更新
+    update: 変更
     save: 保存
     done: 完了
     undo: 取消
@@ -31,3 +32,12 @@ ja:
     - :year
     - :month
     - :day
+
+  item:
+    name: 品目名
+    type: 収支タイプ
+    price: 金額
+    happen_at: 発生日
+
+  total:
+    amount: Total

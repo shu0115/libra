@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
 
-  layout "base"
+#  layout "base"
 
   before_filter :date_set_filter
 
@@ -57,7 +57,7 @@ class ItemsController < ApplicationController
     @item = Item.new( params[:item] )
 
     if @item.save
-      flash[:notice] = '品目の新規作成が完了しました。'
+#      flash[:notice] = '品目の新規作成が完了しました。'
       redirect_to :controller => "total", :action => "amount", :sum_type => @sum_type, :date=> @now_date
     else
       redirect_to :action => "new"
@@ -77,7 +77,7 @@ class ItemsController < ApplicationController
     params[:item][:price] = params[:item][:price].gsub( " ", "" )  # 半角空白を削除
 
     if @item.update_attributes( params[:item] )
-      flash[:notice] = '品目の更新が完了しました。'
+#      flash[:notice] = '品目の更新が完了しました。'
       redirect_to :controller => "total", :action => "amount", :sum_type => @sum_type, :date=> @now_date
     else
       redirect_to :action => "edit"

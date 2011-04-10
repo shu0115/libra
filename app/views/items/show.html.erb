@@ -1,35 +1,33 @@
-<p>
-  <b>品目名:</b>
-  <%=h @item.name %>
-</p>
 
-<p>
-  <b>収支タイプ:</b>
-  <%=h @item_type %>
-</p>
-
-<% if false %>
-<p>
-  <b>周期:</b>
-  <%=h @item.cycle %>
-</p>
-
-<p>
-  <b>周期モード:</b>
-  <%=h @item.cycle_mode %>
-</p>
+<% unless @item.blank? %>
+  <table border="0">
+    <tr>
+      <th align="left"><%= t("item.name") %>:</th>
+      <td><%=h @item.name %></td>
+    </tr>
+    
+    <tr>
+      <th align="left"><%= t("item.type") %>:</th>
+      <td><%=h @item_type %></td>
+    </tr>
+    
+    <tr>
+      <th align="left"><%= t("item.price") %>:</th>
+      <td><%=h number_with_delimiter( @item.price ) %>円</td>
+    </tr>
+    
+    <tr>
+      <th align="left"><%= t("item.happen_at") %>:</th>
+      <td><%=h @item.happen_at.strftime("%Y年%m月%d日") unless @item.happen_at.blank? %></td>
+    </tr>
+  </table>
+  
+  <br />
+  
+  <span class="menu">
+    <%= link_to t("menu.list"), :controller => "total", :action => "amount", :sum_type => @sum_type, :date=> @now_date -%>
+    <%= link_to t("menu.edit"), :action => "edit", :id => @item.id, :sum_type => @sum_type, :date=> @now_date -%>
+  </span>
 <% end %>
 
-<p>
-  <b>金額:</b>
-	<%=h number_with_delimiter( @item.price ) %>円
-</p>
-
-<p>
-  <b>発生日:</b>
-  <%=h @item.happen_at %>
-</p>
-
-
-<%= link_to '編集', :action => "edit", :id => @item.id, :sum_type => @sum_type, :date=> @now_date %>
- | <%= link_to '一覧', :controller => "total", :action => "amount", :sum_type => @sum_type, :date=> @now_date %>
+<br />
