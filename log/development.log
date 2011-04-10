@@ -1359,3 +1359,34 @@ Processing SummaryController#list (for 127.0.0.1 at 2011-01-10 06:18:08) [GET]
 Rendering template within layouts/summary
 Rendering summary/list
 Completed in 63ms (View: 11, DB: 2) | 200 OK [http://localhost/summary]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-04-10 11:14:31) [GET]
+  [4;36;1mItem Load (0.4ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at >= '2011-04-01' AND happen_at <= '2011-04-30') ORDER BY happen_at ASC, id ASC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-04-01' AND happen_at <= '2011-04-30') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-04-01' AND happen_at <= '2011-04-30') [0m
+Rendering template within layouts/base
+Rendering total/amount
+Completed in 37ms (View: 25, DB: 1) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateItems (1)
+Migrating to ChangeAddColumn (2)
+Migrating to CreateUsers (20110410030449)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login_id" varchar(255), "hashed_password" varchar(255), "salt" varchar(255), "display_name" varchar(255), "level" varchar(255), "twitter_id" varchar(255), "mail_address" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20110410030449')[0m
+  [4;35;1mSQL (0.1ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.1ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("items")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("users")[0m
