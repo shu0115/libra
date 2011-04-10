@@ -55,6 +55,7 @@ class ItemsController < ApplicationController
     params[:item][:price] = params[:item][:price].gsub( " ", "" )  # 半角空白を削除
 
     @item = Item.new( params[:item] )
+    @item.user_id = session[:user_id]
 
     if @item.save
 #      flash[:notice] = '品目の新規作成が完了しました。'

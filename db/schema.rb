@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(:version => 20110410124319) do
   create_table "items", :force => true do |t|
     t.string   "name"
     t.string   "item_type"
-    t.integer  "cycle",      :limit => 255
+    t.integer  "cycle"
     t.integer  "price"
     t.date     "happen_at"
     t.datetime "created_at"

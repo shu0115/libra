@@ -16,7 +16,7 @@ class TotalController < ApplicationController
     end
 
     # 品目取得
-    @items, @income, @expense = Item.find_items( :now_date => @now_date, :sum_type => @sum_type, :page => params[:page] )
+    @items, @income, @expense = Item.find_items( :now_date => @now_date, :sum_type => @sum_type, :page => params[:page], :user_id => session[:user_id] )
 
     # 合計算出
     @amount, @income, @expense = Item.sum_price( :income => @income, :expense => @expense )

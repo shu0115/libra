@@ -1,22 +1,22 @@
 
 <div class="pagination">
 
-<%= link_to( "今日", :controller => "total", :action => 'amount', :date => Date.new( Time.now.year, Time.now.month, Time.now.day ), :sum_type => "day" ) -%>
-　<%= link_to( "今月", :controller => "total", :action => 'amount', :date => Date.new( Time.now.year, Time.now.month, Time.now.day ), :sum_type => "month" ) -%>
-　<%= link_to( "今年", :controller => "total", :action => 'amount', :date => Date.new( Time.now.year, Time.now.month, Time.now.day ), :sum_type => "year" ) -%><br />
+<%= link_to( "今日", :action => 'amount', :date => Date.new( Time.now.year, Time.now.month, Time.now.day ), :sum_type => "day" ) -%>
+ <%= link_to( "今月", :action => 'amount', :date => Date.new( Time.now.year, Time.now.month, Time.now.day ), :sum_type => "month" ) -%>
+ <%= link_to( "今年", :action => 'amount', :date => Date.new( Time.now.year, Time.now.month, Time.now.day ), :sum_type => "year" ) -%><br />
 
 <br />
 
 <%# 前年 %>
-<%= link_to( "#{(@now_date.last_year).year}年", :controller => "total", :action=>'amount', :date => (@now_date.last_year), :sum_type => "year" ) -%>
+<%= link_to( "#{(@now_date.last_year).year}年", :action=>'amount', :date => (@now_date.last_year), :sum_type => "year" ) -%>
 <%# 今年 %>
 <% if @sum_type == "year" or @sum_type == "month" or @sum_type == "day" %>
 <span class="current"><%= "#{@now_date.year}年" -%></span>
 <% else %>
-<%= link_to( "#{@now_date.year}年", :controller => "total", :action=>'amount', :date => @now_date, :sum_type => "year" ) -%>
+<%= link_to( "#{@now_date.year}年", :action=>'amount', :date => @now_date, :sum_type => "year" ) -%>
 <% end %>
 <%# 翌年 %>
-<%= link_to( "#{(@now_date.next_year).year}年", :controller => "total", :action=>'amount', :date => (@now_date.next_year), :sum_type => "year" ) -%>
+<%= link_to( "#{(@now_date.next_year).year}年", :action=>'amount', :date => (@now_date.next_year), :sum_type => "year" ) -%>
 
 <br />
 <br />
@@ -26,7 +26,7 @@
 	<% if (@sum_type == "month" or @sum_type == "day") and @now_date.month == month %>
   	<span class="current"><%= "#{month}月" -%></span>
 	<% else %>
-	  <%= link_to( "#{month}月", :controller => "total", :action=>'amount', :date => "#{@now_date.year}-#{month}-#{@now_date.day}", :sum_type => "month" ) -%>
+	  <%= link_to( "#{month}月", :action=>'amount', :date => "#{@now_date.year}-#{month}-#{@now_date.day}", :sum_type => "month" ) -%>
 	<% end %>
 <% } %>
 
@@ -40,11 +40,11 @@
 		<% if @sum_type == "day" %>
 			<span class="current"><%= "#{day}" -%></span>
 		<% else %>
-			<%= link_to( "#{day}", :controller => "total", :action=>"amount", :date => @now_date, :sum_type => "day" ) -%>
+			<%= link_to( "#{day}", :action=>"amount", :date => @now_date, :sum_type => "day" ) -%>
 		<% end %>
 	<% else %>
 		<%# 今日以外 %>
-		<%= link_to( "#{day}", :controller => "total", :action=>"amount", :date => @now_date.change( :day => day ), :sum_type => "day" ) -%>
+		<%= link_to( "#{day}", :action=>"amount", :date => @now_date.change( :day => day ), :sum_type => "day" ) -%>
 	<% end %>
 <% } %>
 </div>
@@ -56,6 +56,7 @@
 <h1>Total#<%= @sum_type %></h1>
 <% end %>
 
+<%# 現在日付 %>
 <% if @sum_type == "year" or @sum_type == "month" or @sum_type == "day" %>
 <table>
 	<tr>

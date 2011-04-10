@@ -5,7 +5,7 @@
 <% form_for @item, :url => { :action => "create", :sum_type => @sum_type, :date=> @now_date } do |f| %>
   <p>
     <b>品目名</b><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :class => "input_field_width_200" %>
   </p>
 
   <br />
@@ -28,7 +28,7 @@
   
   <p>
     <b>金額</b><br />
-    <%= f.text_field :price, :size => "20" %>
+    <%= f.text_field :price, :size => "20", :class => "input_field_width_100" %>円
   </p>
 
   <br />
@@ -41,7 +41,7 @@
   <br />
 
   <p>
-    <%= f.submit "作成" %>
+    <%= f.submit t("menu.create"), :disable_with => t("menu.create") %>
   </p>
 <% end %>
 

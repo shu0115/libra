@@ -1,8 +1,71 @@
 
 <!--<h1>Summary#list</h1>-->
 
-<table border="0">
+<br />
 
+<div class="pagination">
+
+<%= link_to( "今月", :action => 'list', :date => Date.new( Time.now.year, Time.now.month, Time.now.day ), :sum_type => "day" ) -%>
+ <%= link_to( "今年", :action => 'list', :date => Date.new( Time.now.year, Time.now.month, Time.now.day ), :sum_type => "month" ) -%><br />
+
+<br />
+
+<%= link_to '年次', :action => "list" %><br />
+
+<br />
+
+月次：
+<%# 前年 %>
+<%= link_to( "#{(@now_date.last_year).year}年", :action=>'list', :date => (@now_date.last_year), :sum_type => "month" ) -%>
+
+<%# 今年 %>
+<% if @sum_type == "month" or @sum_type == "day" %>
+  <span class="current"><%= "#{@now_date.year}年" -%></span>
+<% else %>
+  <%= link_to( "#{@now_date.year}年", :action=>'list', :date => @now_date, :sum_type => "month" ) -%>
+<% end %>
+
+<%# 翌年 %>
+<%= link_to( "#{(@now_date.next_year).year}年", :action=>'list', :date => (@now_date.next_year), :sum_type => "month" ) -%>
+
+<br />
+<br />
+
+日次：
+<%# 1月～12月まで %>
+<% 1.upto( 12 ) { |month| %>
+  <% if @sum_type == "day" and @now_date.month == month %>
+    <span class="current"><%= "#{month}月" -%></span>
+  <% else %>
+    <%= link_to( "#{month}月", :action=>'list', :date => "#{@now_date.year}-#{month}-#{@now_date.day}", :sum_type => "day" ) -%>
+  <% end %>
+<% } %>
+
+</div>
+
+<br />
+<br />
+
+<%# 現在日付 %>
+<% if @sum_type == "year" or @sum_type == "month" or @sum_type == "day" %>
+<table>
+	<tr>
+    <td>
+      <% if @sum_type == "year" %>
+        <p><%= @now_date.strftime( "%Y年" ) %></p>
+      <% elsif @sum_type == "month" %>
+      	<p><%= @now_date.strftime( "%Y年%m月" ) %></p>
+      <% elsif @sum_type == "day" %>
+      	<p><%= @now_date.strftime( "%Y年%m月%d日" ) %></p>
+      <% end %>
+    </td>
+  </tr>
+</table>
+<% end %>
+
+<br />
+
+<table border="0">
 	<tr>
 		<th><%= @sum_type_title %></th>
 		<th style="color: blue;">収入</th>
@@ -10,25 +73,22 @@
 		<th>合計</th>
 	</tr>
 
-<% unless @summary_hash.blank? %>
-
-	<%# each_with_index %>
-	<% @summary_hash.each{ |value| %>
-		<tr>
-			<!-- 期間 -->
-			<td style="text-align: right"><%= value[0] %><%= @sum_type_title %></td>
-
-			<!-- 収入 -->
-			<td style="text-align: right; color: blue;"><%= value[1][:income] %></td>
-
-			<!-- 支出 -->
-			<td style="text-align: right; color: red;"><%= value[1][:expense] %></td>
-
-			<!-- 合計 -->
-			<td style="text-align: right"><%= value[1][:amount] %></td>
-		</tr>
-	<% } # each_with_index - END %>
-
-<% end %>
-
+  <% unless @summary_hash.blank? %>
+  	<%# each_with_index %>
+    <% @summary_hash.each{ |value| %>
+      <tr>
+        <!-- 期間 -->
+        <td style="text-align: right"><%= value[0] %><%= @sum_type_title %></td>
+        
+        <!-- 収入 -->
+        <td style="text-align: right; color: blue;"><%= value[1][:income] %></td>
+        
+        <!-- 支出 -->
+        <td style="text-align: right; color: red;"><%= value[1][:expense] %></td>
+        
+        <!-- 合計 -->
+        <td style="text-align: right"><%= value[1][:amount] %></td>
+      </tr>
+      <% } # each_with_index - END %>
+  <% end %>
 </table>
