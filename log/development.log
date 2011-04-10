@@ -4465,3 +4465,58 @@ Processing TotalController#amount (for 127.0.0.1 at 2011-04-10 21:28:02) [GET]
 Rendering template within layouts/application
 Rendering total/amount
 Completed in 32ms (View: 23, DB: 1) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.4ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateItems (1)
+Migrating to ChangeAddColumn (2)
+Migrating to CreateUsers (20110410030449)
+Migrating to AddColumn01 (20110410124319)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mALTER TABLE "items" ADD "user_id" integer[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20110410124319')[0m
+  [4;35;1mSQL (0.1ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.1ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("items")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("users")[0m
+
+
+Processing EntryController#logout (for 127.0.0.1 at 2011-04-10 21:47:04) [POST]
+  Parameters: {"commit"=>"ログアウト", "method"=>"put", "authenticity_token"=>"eo6bwkejlLsq9E47bYiwZ/RR/9wgLMiLuBYGBtl101s=", "request_url"=>"http://localhost:3000/"}
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+Redirected to http://localhost:3000/entry/login
+Completed in 43ms (DB: 0) | 302 Found [http://localhost/entry/logout?method=put]
+
+
+Processing EntryController#login (for 127.0.0.1 at 2011-04-10 21:47:04) [GET]
+Rendering template within layouts/application
+Rendering entry/login
+Completed in 13ms (View: 9, DB: 0) | 200 OK [http://localhost/entry/login]
+
+
+Processing EntryController#login (for 127.0.0.1 at 2011-04-10 21:47:07) [POST]
+  Parameters: {"commit"=>"ログイン", "authenticity_token"=>"eo6bwkejlLsq9E47bYiwZ/RR/9wgLMiLuBYGBtl101s=", "login"=>{"login_id"=>"test", "password"=>"test"}}
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."login_id" = 'test') LIMIT 1[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT login_id, display_name FROM "users" WHERE (id = 1) LIMIT 1[0m
+  [4;36;1mItem Update (1.9ms)[0m   [0;1mUPDATE "items" SET user_id = 1 [0m
+Redirected to http://localhost:3000/
+Completed in 10ms (DB: 2) | 302 Found [http://localhost/entry/login]
+
+
+Processing TotalController#amount (for 127.0.0.1 at 2011-04-10 21:47:07) [GET]
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mItem Load (0.2ms)[0m   [0;1mSELECT * FROM "items" WHERE (happen_at >= '2011-04-01' AND happen_at <= '2011-04-30') ORDER BY happen_at ASC, id ASC LIMIT 15 OFFSET 0[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'income' AND happen_at >= '2011-04-01' AND happen_at <= '2011-04-30') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT sum("items".price) AS sum_price FROM "items" WHERE (item_type = 'expense' AND happen_at >= '2011-04-01' AND happen_at <= '2011-04-30') [0m
+Rendering template within layouts/application
+Rendering total/amount
+Completed in 31ms (View: 23, DB: 1) | 200 OK [http://localhost/]

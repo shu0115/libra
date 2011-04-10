@@ -52,8 +52,10 @@ class EntryController < ApplicationController
       unless user.blank?
         # ユーザ情報をセッションに格納
         user_session_set( user )
+        
+        result = Item.update_all( [ "user_id = ?", session[:user_id] ] )
 
-#        flash[:notice] = "ログインに成功しました。"
+        flash[:notice] = "ログインに成功しました。#{result}"
         unless session[:request_url].blank?
 #          print "[ session[:request_url] ] : "; p session[:request_url] ;
           redirect_to session[:request_url]
