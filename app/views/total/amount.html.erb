@@ -106,7 +106,7 @@
 			<td><span style="color: <%= type_color %>;"><%=h $type_hash[item.item_type] %></span></td>
 
 			<!-- 金額 -->
-			<td align="right"><%= "-" if $type_hash[item.item_type] == "支出" %><%= number_with_delimiter( item.price ) %>円</td>
+			<td align="right"><%= "-" if $type_hash[item.item_type] == "支出" %><%= number_with_delimiter( item.price, "," ) %>円</td>
 
 			<!-- 発生日 -->
 			<td><%=h item.happen_at.strftime( "%Y/%m/%d" ) unless item.happen_at.blank? %></td>
@@ -129,17 +129,17 @@
 <table>
 	<tr>
 		<th><span style="color: blue;">収入</span>：</th>
-		<td align="right"><%= number_with_delimiter( @income ) %>円</td>
+		<td align="right"><%= number_with_delimiter( @income, "," ) %>円</td>
 	</tr>
 
 	<tr>
 		<th><span style="color: red;">支出</span>：</th>
-		<td align="right">-<%= number_with_delimiter( @expense ) %>円</td>
+		<td align="right">-<%= number_with_delimiter( @expense, "," ) %>円</td>
 	</tr>
 
 	<tr>
 		<th>合計：</th>
-		<td align="right"><%= number_with_delimiter( @amount ) %>円</td>
+		<td align="right"><%= number_with_delimiter( @amount, "," ) %>円</td>
 	</tr>
 </table>
 

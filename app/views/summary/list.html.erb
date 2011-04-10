@@ -81,14 +81,14 @@
         <td style="text-align: right"><%= value[0] %><%= @sum_type_title %></td>
         
         <!-- 収入 -->
-        <td style="text-align: right; color: blue;"><%= value[1][:income] %></td>
+        <td style="text-align: right; color: blue;"><%= number_with_delimiter( value[1][:income], "," ) %>円</td>
         
         <!-- 支出 -->
-        <td style="text-align: right; color: red;"><%= value[1][:expense] %></td>
+        <td style="text-align: right; color: red;"><%= number_with_delimiter( value[1][:expense], "," ) %>円</td>
         
         <!-- 合計 -->
-        <td style="text-align: right"><%= value[1][:amount] %></td>
+        <td style="text-align: right"><%= number_with_delimiter( value[1][:amount], "," ) %>円</td>
       </tr>
-      <% } # each_with_index - END %>
+      <% } %>
   <% end %>
 </table>
