@@ -75,8 +75,10 @@
 
 <br />
 
-<%# ページング %>
-<%= will_paginate @items, :previous_label => 'Prev', :next_label => 'Next', :params => { :action => "amount" } %>
+<%# ページング(月／日以外であれば) %>
+<% if @sum_type != "month" and @sum_type != "day" %>
+  <%= will_paginate @items, :previous_label => 'Prev', :next_label => 'Next', :params => { :action => "amount" } %>
+<% end %>
 
 <table>
 	<tr>
@@ -120,8 +122,10 @@
 <% end %>
 </table>
 
-<%# ページング %>
-<%= will_paginate @items, :previous_label => 'Prev', :next_label => 'Next', :params => { :action => "amount" } %>
+<%# ページング(月／日以外であれば) %>
+<% if @sum_type != "month" and @sum_type != "day" %>
+  <%= will_paginate @items, :previous_label => 'Prev', :next_label => 'Next', :params => { :action => "amount" } %>
+<% end %>
 
 <br />
 <br />
